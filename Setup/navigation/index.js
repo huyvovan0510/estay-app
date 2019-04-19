@@ -9,6 +9,7 @@ import {
 import Home from '../src/screens/Home';
 import DetailsProduct from '../src/screens/DetailsProduct';
 import Login from '../src/screens/Login';
+import Hotel from '@src/screens/ListProduct/Hotel';
 import Setting from '../src/screens/Setting';
 import map from '../src/screens/map';
 import getTabBarIcon from './getBarIcon';
@@ -49,6 +50,9 @@ const Stack = createStackNavigator(
     },
     DetailsProduct: {
       screen: DetailsProduct,
+    },
+    Hotel: {
+      screen: Hotel,
     },
   },
   {

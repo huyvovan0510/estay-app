@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -13,18 +13,14 @@ import {
 import Carousel from 'react-native-snap-carousel';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import AnimatedHeader from 'react-native-animated-header';
 import { widthScreen, heightScreen } from '../../comon/Dimensions';
 import ItemProduct from '../../components/ItemProduct';
 import ItemProduct_1 from '../../components/ItemProdcut_1';
 import ItemProduct_2 from '../../components/ItemProduct_2';
 import Header from '../../comon/Header';
 import styles from './style';
-
 import { data } from '../../data';
-const HEADER_MAX_HEIGHT = 200;
-const HEADER_MIN_HEIGHT = 60;
-const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
+
 const category = [
   {
     id: '1',
@@ -40,16 +36,18 @@ const category = [
   },
   {
     id: '3',
-    name: 'Home Stay',
+    name: 'HomeStay',
     linerColor: ['#8E78FF', '#FC7D7B'],
     iconName: 'hotel',
   },
 ];
+
 const Home = ({ navigation }) => {
   const _renderSile = ({ item, index }) => {
     return (
       <TouchableOpacity
         onPress={() => {
+          //navigate to Details product scerren  and pass data
           navigation.push('DetailsProduct', { data: item });
         }}>
         <Image
@@ -62,13 +60,13 @@ const Home = ({ navigation }) => {
       </TouchableOpacity>
     );
   };
+  //renderItems Category
   const _renderItemCategory = (item, index) => {
     return (
       <TouchableOpacity
-        style={{
-          alignItems: 'center',
-          width: widthScreen / 3 - 30,
-          justifyContent: 'center',
+        style={styles.category}
+        onPress={() => {
+          navigation.push(item.name);
         }}>
         <LinearGradient colors={item.linerColor} style={styles.itemCategory}>
           <Icon name={item.iconName} size={20} color="#fff" />
@@ -77,6 +75,7 @@ const Home = ({ navigation }) => {
       </TouchableOpacity>
     );
   };
+  //render  Items  TopHotel
   const _renderItemProduct = ({ item, index }) => {
     return (
       <TouchableOpacity
@@ -88,6 +87,8 @@ const Home = ({ navigation }) => {
       </TouchableOpacity>
     );
   };
+
+  //render
   const _renderItemProduct_1 = ({ item, index }) => {
     return (
       <TouchableOpacity

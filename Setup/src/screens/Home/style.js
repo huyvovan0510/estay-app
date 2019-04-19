@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native';
+import { widthScreen } from '@src/comon/Dimensions';
+
 const styles = StyleSheet.create({
   boxCarosel: {
     marginTop: 3,
@@ -64,6 +66,11 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingHorizontal: 15,
+  },
+  category: {
+    alignItems: 'center',
+    width: widthScreen / 3 - 30,
+    justifyContent: 'center',
   },
 });
 export default styles;

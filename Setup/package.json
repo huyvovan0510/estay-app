@@ -16,6 +16,7 @@
     "react": "16.9.0",
     "react-native": "0.61.1",
     "react-native-animated-header": "^1.0.7",
+    "react-native-animation-layout": "^0.0.13",
     "react-native-camera": "^3.6.0",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-linear-gradient": "^2.5.6",

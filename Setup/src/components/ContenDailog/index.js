@@ -41,7 +41,7 @@ const ContentDailog = ({ data, unLike }) => {
         <StarRating
           containerStyle={{ width: widthScreen / 2 }}
           starSize={35}
-          animation="jello"
+          animation="swing"
           emptyStarColor={'#c9c9c9'}
           starStyle={{
             shadowColor: '#000',

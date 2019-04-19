@@ -8,17 +8,11 @@ import ItemLiked from '@src/components/ItemLiked';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const Map = ({ data = [], unLike }) => {
- return (
+  return (
     <View>
       <View style={styles.header}>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            height: '100%',
-            alignItems: 'flex-end',
-          }}>
-          <Text style={styles.iitle}>Yêu Thích</Text>
+        <View style={styles.subHeader}>
+          <Text style={styles.title}>Yêu Thích</Text>
         </View>
       </View>
       {data.length > 0 ? (
@@ -29,12 +23,6 @@ const Map = ({ data = [], unLike }) => {
         </ScrollView>
       ) : (
         <View style={styles.contaimer}>
-          {/* <View style={styles.boxContent}>
-            <Icons name="hearto" size={40} color={'#ababab'} type="AntDesign" />
-            <Text style={styles.txtContent}>
-              Bạn chưa có khách sạn nào trong muc yêu thich cả !
-            </Text>
-          </View> */}
           <Image
             source={{
               uri:
@@ -42,13 +30,6 @@ const Map = ({ data = [], unLike }) => {
             }}
             style={{ width: '70%', height: '70%' }}
           />
-          {/* <LottieView
-            autoPlay
-            ref={animation => {
-              this.animation = animation;
-            }}
-            source={require('@src/assets/annimated/empty.json')}
-          /> */}
         </View>
       )}
     </View>
@@ -67,7 +48,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: heightScreen / 9,
   },
-  iitle: {
+  titles: {
     color: '#000',
     fontSize: 20,
     fontWeight: '500',
@@ -83,6 +64,12 @@ const styles = StyleSheet.create({
     color: '#ababab',
     fontSize: 18,
     lineHeight: 30,
+  },
+  subHeader: {
+    flexDirection: 'row',
+    width: '100%',
+    height: '100%',
+    alignItems: 'flex-end',
   },
 });
 
