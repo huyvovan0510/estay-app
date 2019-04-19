@@ -67,7 +67,6 @@ const Home = ({ navigation }) => {
       <TouchableOpacity
         style={{
           alignItems: 'center',
-          // alignSelf: 'center',
           width: widthScreen / 3 - 30,
           justifyContent: 'center',
         }}>
@@ -107,7 +106,9 @@ const Home = ({ navigation }) => {
   return (
     // <SafeAreaView style={{backgroundColor: '#f0f0f0'}}>ơ
     <Header>
-      <ScrollView style={{ backgroundColor: '#ffff' }}>
+      <ScrollView
+        style={{ backgroundColor: '#ffff' }}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.boxCarosel}>
           <Carousel
             autoplay

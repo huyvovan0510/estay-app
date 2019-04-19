@@ -1,5 +1,5 @@
 import { Platform, StyleSheet } from 'react-native';
-
+import { widthScreen } from '@src/comon/Dimensions';
 const HEADER_MAX_HEIGHT = 110;
 const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 80 : 93;
 const styles = StyleSheet.create({
@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignSelf: 'center',
-
-    fontSize: 20,
-    color: '#ffff',
+    marginTop: 30,
+    fontSize: 25,
+    color: 'red',
     fontWeight: '500',
   },
   header: {
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#03A9F4',
+    backgroundColor: 'transparent',
     overflow: 'hidden',
     height: HEADER_MAX_HEIGHT,
   },
@@ -61,14 +61,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   searchBar: {
+    width: widthScreen - 30,
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'center',
+    backgroundColor: '#ffff',
+    borderRadius: 8,
+    padding: 5,
     marginTop: 60,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
   },
   input: {
-    backgroundColor: '#ffff',
-    width: 280,
+    width: '100%',
     height: 35,
     padding: 5,
   },

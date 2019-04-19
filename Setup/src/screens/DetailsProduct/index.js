@@ -11,6 +11,9 @@ import Icons from '@src/comon/Icon';
 import styles from './style';
 import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Modal from 'react-native-modal';
+import { widthScreen, heightScreen } from '@src/comon/Dimensions';
+import ContentDailog from '@src/components/ContenDailog';
 
 const Rooms = [
   { id: '1', room: '102' },
@@ -45,6 +48,7 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
   const [id, setId] = useState('');
   const [isDask, setIsDask] = useState(false);
   const [isLove, setIsLove] = useState(false);
+  const [showRiview, setShowRivew] = useState(false);
   const getID = id => {
     setId(id);
   };
@@ -216,9 +220,30 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
               </Text>
             </View>
           </View>
-          <View style={styles.btnReadAll}>
+          <TouchableOpacity
+            style={styles.btnReadAll}
+            onPress={() => {
+              setShowRivew(true);
+            }}>
             <Text style={styles.readAll}>Read all review</Text>
-          </View>
+            <Modal
+              isVisible={showRiview}
+              avoidKeyboard={true}
+              onBackdropPress={() => {
+                setShowRivew(false);
+              }}>
+              <View
+                style={{
+                  width: widthScreen - 40,
+                  height: heightScreen - 300,
+                  backgroundColor: '#fff',
+                  alignSelf: 'center',
+                  borderRadius: 8,
+                }}>
+                <ContentDailog />
+              </View>
+            </Modal>
+          </TouchableOpacity>
         </View>
       </ScrollView>
       <View

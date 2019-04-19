@@ -38,7 +38,7 @@ const ItemLiked = ({ data, unLike }) => {
           onPress={() => {
             unLike(data);
           }}>
-          <Icons name="hearto" size={30} color={'red'} type="AntDesign" />
+          <Icons name="hearto" size={20} color={'red'} type="AntDesign" />
         </TouchableOpacity>
       </View>
     </View>
