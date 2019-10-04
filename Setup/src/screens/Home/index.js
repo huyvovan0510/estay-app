@@ -45,7 +45,7 @@ const category = [
     iconName: 'hotel',
   },
 ];
-const Home = () => {
+const Home = ({ navigation }) => {
   const _renderSile = ({ item, index }) => {
     return (
       <TouchableOpacity>
@@ -79,7 +79,15 @@ const Home = () => {
     return <ItemProduct data={item} />;
   };
   const _renderItemProduct_1 = ({ item, index }) => {
-    return <ItemProduct_1 data={item} index={index} />;
+    return (
+      <TouchableOpacity
+        style={styles.shadow}
+        onPress={() => {
+          navigation.push('DetailsProduct', { data: item });
+        }}>
+        <ItemProduct_1 data={item} index={index} />
+      </TouchableOpacity>
+    );
   };
   const _renderItemProduct_2 = ({ item, index }) => {
     return <ItemProduct_2 data={item} />;

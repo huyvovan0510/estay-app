@@ -4,8 +4,7 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/Entypo';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const ItemProduct = ({ data, index }) => {
-  console.log(data.sale, data);
+const ItemProduct = ({ data, index, navigation }) => {
   return (
     <TouchableOpacity style={styles.shadow}>
       <View

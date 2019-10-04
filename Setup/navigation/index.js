@@ -12,7 +12,7 @@ import Login from '../src/screens/Login';
 import Setting from '../src/screens/Setting';
 import map from '../src/screens/map';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {SourceMapConsumer} from 'source-map';
+import { SourceMapConsumer } from 'source-map';
 
 // const BottomTab = createBottomTabNavigator({
 //   Home: {
@@ -29,21 +29,26 @@ const BottomTab = createBottomTabNavigator({
   Home: {
     screen: Home,
   },
-  DetailsProduct: {
-    screen: DetailsProduct,
+  map: {
+    screen: map,
   },
   Setting: {
     screen: Setting,
   },
 });
-const Stack = createStackNavigator({
-  map: {
-    screen: map,
+const Stack = createStackNavigator(
+  {
+    BottomTab: {
+      screen: BottomTab,
+    },
+    DetailsProduct: {
+      screen: DetailsProduct,
+    },
   },
-  login: {
-    screen: Login,
+  {
+    headerMode: 'none',
   },
-});
+);
 // const stack = createStackNavigator({
 //   map: {
 //     screen: map,
@@ -52,14 +57,6 @@ const Stack = createStackNavigator({
 //     screen: Drawer,
 //   },
 // });
-const St = createSwitchNavigator({
-  stack: {
-    screen: Stack,
-  },
-  BottomTab: {
-    screen: BottomTab,
-  },
-});
 
-const AppNavigation = createAppContainer(BottomTab);
+const AppNavigation = createAppContainer(Stack);
 export default AppNavigation;
