@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   ScrollView,
@@ -9,9 +8,10 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icons from '@src/comon/Icon';
-import { heightScreen } from '../../comon/Dimensions';
-import { Item } from 'native-base';
+import styles from './style';
+import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
 const Rooms = [
   { id: '1', room: '102' },
   { id: '2', room: '105' },
@@ -21,21 +21,30 @@ const Rooms = [
   { id: '6', room: '123' },
   { id: '7', room: '122' },
 ];
-const DetailsProduct = ({ navigation }) => {
+const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
+  console.log('render');
+
   const item = navigation.state.params;
   const { data } = item;
-
+  console.log('passingdata', data.id);
+  console.log(dataLiked.id);
   const {
     Price = 0,
     dec = '',
     thumbImg = '',
     imgSrc = '',
-    hotelName = '',
+    hotelName = 'Sontana Hotel',
     location = '',
   } = data;
-  console.log('data', data.thumbImg);
+  useEffect(() => {
+    // data.id === dataLiked.id ? setIsLove(true) : setIsLove(false);
+    dataLiked.map(item => {
+      item.id === data.id ? setIsLove(true) : null;
+    });
+  }, [data.id, dataLiked, dataLiked.id]);
   const [id, setId] = useState('');
   const [isDask, setIsDask] = useState(false);
+  const [isLove, setIsLove] = useState(false);
   const getID = id => {
     setId(id);
   };
@@ -66,12 +75,17 @@ const DetailsProduct = ({ navigation }) => {
                   color="#ffff"
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setIsLove(!isLove);
+                  console.warn(isLove);
+                  !isLove ? isLike(data) : unLike(data);
+                }}>
                 <Icons
                   name="hearto"
                   size={25}
                   type={'AntDesign'}
-                  color="#ffff"
+                  color={isLove ? '#ff0044' : '#fff'}
                 />
               </TouchableOpacity>
             </View>
@@ -83,7 +97,7 @@ const DetailsProduct = ({ navigation }) => {
           </ImageBackground>
         </View>
         <View style={styles.BoxTitle}>
-          <Text style={styles.hotelName}>{data.hotelName}</Text>
+          <Text style={styles.hotelName}>{hotelName}</Text>
           <View style={styles.rowLocation}>
             <Icons
               name={'location-pin'}
@@ -250,206 +264,16 @@ const DetailsProduct = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  boxImg: {
-    height: heightScreen / 1.5,
-    backgroundColor: 'red',
-    justifyContent: 'flex-end',
-  },
-  BoxTitle: {
-    backgroundColor: '#000',
-    padding: 15,
-  },
-  hotelName: {
-    marginBottom: 10,
-    color: '#ffff',
-    fontSize: 33,
-    fontWeight: '500',
-  },
-  txtLocation: {
-    marginLeft: 10,
-    color: '#ffff',
-    fontSize: 15,
-  },
-  rowLocation: {
-    marginBottom: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  numRate: {
-    marginLeft: 20,
-    color: '#ffff',
-    fontSize: 15,
-  },
-  rowRate: {
-    flexDirection: 'row',
-    borderColor: '#4f4e4e',
-    borderBottomWidth: 1,
-
-    marginVertical: 5,
-    alignItems: 'center',
-  },
-  boxHastag: {
-    backgroundColor: '#4f4e4e',
-  },
-  rowHastag: {
-    flex: 1,
-  },
-  rowCategoty: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  txtCategory: { marginLeft: 20, color: '#ffff', fontSize: 15 },
-  txtLiner: {
-    paddingVertical: heightScreen / 7,
-  },
-  img: {
-    justifyContent: 'flex-end',
-    width: '100%',
-    height: '100%',
-  },
-  btnRooms: { margin: 5, padding: 8, borderWidth: 1, borderRadius: 4 },
-  txtRooms: {
-    color: '#fff',
-    fontSize: 19,
-    fontWeight: '500',
-  },
-  boxRooms: {
-    borderBottomWidth: 1,
-    borderColor: '#4f4e4e',
-    paddingBottom: 5,
-  },
-  roomStatus: {
-    marginTop: 10,
-    color: '#a8a8a8',
-    fontSize: 16,
-  },
-  status: {
-    color: '#e3e3e3',
-    fontSize: 16,
-  },
-  dec: {
-    paddingTop: 15,
-    paddingHorizontal: 15,
-    backgroundColor: '#fff',
-    paddingBottom: 50,
-  },
-  txtConten: {
-    fontSize: 16,
-    lineHeight: 25,
-    fontWeight: '300',
-  },
-  txtDetails: {
-    fontSize: 25,
-    lineHeight: 35,
-    fontWeight: '500',
-  },
-  boxServer: {
-    borderWidth: 2,
-    borderColor: '#000',
-    borderRadius: 8,
-    marginRight: 25,
-    paddingVertical: 30,
-    paddingHorizontal: 35,
-  },
-  txtService: {
-    fontWeight: '600',
-    fontSize: 18,
-  },
-  service: {
-    marginVertical: 10,
-    fontSize: 25,
-    lineHeight: 35,
-    fontWeight: '500',
-  },
-  avata: {
-    marginRight: 10,
-    width: 45,
-    height: 45,
-    borderRadius: 22,
-    backgroundColor: 'red',
-  },
-  title: { flexDirection: 'row', alignItems: 'center', marginBottom: 20 },
-  review: {
-    fontSize: 25,
-    fontWeight: '300',
-    marginBottom: 20,
-  },
-  useName: {
-    fontWeight: '500',
-    fontSize: 15,
-    lineHeight: 25,
-  },
-  txtContentReviews: {
-    color: '#707070',
-    fontSize: 14,
-    lineHeight: 20,
-  },
-  btnReadAll: {
-    marginTop: 20,
-    alignSelf: 'center',
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    borderRadius: 4,
-    borderColor: '#6abd96',
-    borderWidth: 2,
-  },
-  readAll: {
-    color: '#6abd96',
-  },
-  headerDetails: {
-    width: '100%',
-    padding: 15,
-
-    position: 'absolute',
-    top: '8%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  book: {
-    padding: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-    elevation: 24,
-    width: '100%',
-    height: 70,
-  },
-  btnBook: {
-    width: '30%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-
-    elevation: 6,
-
-    borderRadius: 8,
-  },
-  price: {
-    fontWeight: '400',
-    fontSize: 14,
-  },
-  numPrice: {
-    fontSize: 16,
-  },
-  txtbookNow: {
-    color: '#ffff',
-  },
-});
-
-export default DetailsProduct;
+const mapDispatchToProps = dispatch => {
+  return {
+    isLike: data => dispatch({ type: 'Liked', data }),
+    unLike: data => dispatch({ type: 'UnLike', data }),
+  };
+};
+const mapStateToProps = state => {
+  return { dataLiked: state.Like };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DetailsProduct);

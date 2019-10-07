@@ -11,31 +11,37 @@ import DetailsProduct from '../src/screens/DetailsProduct';
 import Login from '../src/screens/Login';
 import Setting from '../src/screens/Setting';
 import map from '../src/screens/map';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { SourceMapConsumer } from 'source-map';
+import getTabBarIcon from './getBarIcon';
+import Icons from '@src/comon/Icon';
 
-// const BottomTab = createBottomTabNavigator({
-//   Home: {
-//     screen: Home,
-//   },
-//   DetailsProduct: {
-//     screen: DetailsProduct,
-//   },
-//   Setting: {
-//     screen: Setting,
-//   },
-// });
-const BottomTab = createBottomTabNavigator({
-  Home: {
-    screen: Home,
+const BottomTab = createBottomTabNavigator(
+  {
+    Home: {
+      screen: Home,
+    },
+    map: {
+      screen: map,
+    },
+    Setting: {
+      screen: Setting,
+    },
   },
-  map: {
-    screen: map,
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) =>
+        getTabBarIcon(navigation, focused, tintColor),
+    }),
+    tabBarOptions: {
+      showLabel: false, // hide labels
+      activeTintColor: '#ff1f75', // active icon color
+      inactiveTintColor: 'grey', // inactive icon color
+      style: {
+        paddingTop: 2,
+      },
+    },
   },
-  Setting: {
-    screen: Setting,
-  },
-});
+);
+
 const Stack = createStackNavigator(
   {
     BottomTab: {
@@ -49,14 +55,6 @@ const Stack = createStackNavigator(
     headerMode: 'none',
   },
 );
-// const stack = createStackNavigator({
-//   map: {
-//     screen: map,
-//   },
-//   Drawer: {
-//     screen: Drawer,
-//   },
-// });
 
 const AppNavigation = createAppContainer(Stack);
 export default AppNavigation;

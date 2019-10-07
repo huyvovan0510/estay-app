@@ -48,7 +48,10 @@ const category = [
 const Home = ({ navigation }) => {
   const _renderSile = ({ item, index }) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.push('DetailsProduct', { data: item });
+        }}>
         <Image
           source={{ uri: item.imgSrc }}
           style={{
@@ -76,7 +79,15 @@ const Home = ({ navigation }) => {
     );
   };
   const _renderItemProduct = ({ item, index }) => {
-    return <ItemProduct data={item} />;
+    return (
+      <TouchableOpacity
+        style={styles.shadow}
+        onPress={() => {
+          navigation.push('DetailsProduct', { data: item });
+        }}>
+        <ItemProduct data={item} />
+      </TouchableOpacity>
+    );
   };
   const _renderItemProduct_1 = ({ item, index }) => {
     return (
