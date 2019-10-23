@@ -1,6 +1,7 @@
 import { widthScreen, heightScreen } from '../../comon/Dimensions';
 import { StyleSheet } from 'react-native';
-
+import Util from '@src/comon/Util';
+const { scale } = Util;
 const styles = StyleSheet.create({
   shadow: {
     shadowColor: '#000',
@@ -15,14 +16,14 @@ const styles = StyleSheet.create({
   },
   boxItem: {
     alignSelf: 'center',
-    marginRight: 10,
-    marginVertical: 10,
-    width: widthScreen - 30,
-    height: heightScreen / 5,
+    marginRight: scale(10),
+    marginVertical: scale(10),
+    width: scale(widthScreen) - scale(30),
+    height: scale(150),
     justifyContent: 'flex-end',
-    borderRadius: 8,
+    borderRadius: scale(8),
     overflow: 'hidden',
-    elevation: 15,
+    elevation: 5,
   },
   Liner: {
     width: '100%',
@@ -39,14 +40,14 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   txtLocation: {
-    marginLeft: 5,
+    marginLeft: scale(5),
     fontSize: 10,
     color: '#f5f5f5',
   },
   rowLocation: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 5,
+    marginBottom: scale(5),
   },
 });
 export default styles;

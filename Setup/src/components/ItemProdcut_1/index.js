@@ -4,9 +4,9 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/Entypo';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const ItemProduct = ({ data, index, navigation }) => {
+const ItemProduct_1 = ({ data, index, navigation }) => {
   return (
-    <TouchableOpacity style={styles.shadow}>
+    <View style={styles.shadow}>
       <View
         style={[
           styles.boxItem,
@@ -21,11 +21,11 @@ const ItemProduct = ({ data, index, navigation }) => {
             style={styles.img}
             resizeMode="cover"
           />
-          {!!data.sale && (
+          {/* {!!data.sale && (
             <View style={styles.boxSale}>
               <Text style={{ color: '#ffee8c' }}>Hot</Text>
             </View>
-          )}
+          )} */}
         </View>
         <View style={styles.comtentBox}>
           <View style={styles.textContent}>
@@ -40,8 +40,8 @@ const ItemProduct = ({ data, index, navigation }) => {
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
-export default ItemProduct;
+export default ItemProduct_1;

@@ -18,7 +18,6 @@ const ContentDailog = ({ data, unLike }) => {
   const [Comments, setComments] = useState([]);
   const [isComment, setIComments] = useState(true);
   const [countStart, setCountStart] = useState(0);
-
   const ratingCompleted = rating => {
     setCountStart(rating);
   };
@@ -34,39 +33,42 @@ const ContentDailog = ({ data, unLike }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Icons name="close" type="AntDesign" size={25} />
         <Text style={styles.titleRating}>Đánh giá</Text>
       </View>
       <View style={styles.ratingBox}>
-        <StarRating
-          containerStyle={{ width: widthScreen / 2 }}
-          starSize={35}
-          animation="swing"
-          emptyStarColor={'#c9c9c9'}
-          starStyle={{
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
+        {isComment ? (
+          <StarRating
+            containerStyle={{ width: widthScreen / 2 }}
+            starSize={35}
+            animation="swing"
+            emptyStarColor={'#c9c9c9'}
+            starStyle={{
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
 
-            elevation: 5,
-          }}
-          fullStarColor={'#ffe819'}
-          disabled={false}
-          maxStars={5}
-          rating={countStart}
-          selectedStar={rating => ratingCompleted(rating)}
-        />
+              elevation: 5,
+            }}
+            fullStarColor={'#ffe819'}
+            disabled={false}
+            maxStars={5}
+            rating={countStart}
+            selectedStar={rating => ratingCompleted(rating)}
+          />
+        ) : (
+          <View />
+        )}
       </View>
       <View style={styles.boxComment}>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={Comments}
           renderItem={({ item, index }) => {
-            return <ItemComents data={item} />;
+            return <ItemComents data={item} countStart={countStart} />;
           }}
         />
       </View>
@@ -150,7 +152,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
     borderWidth: 1,
-    elevation: 8,
+    elevation: 0,
   },
   btnSen: {
     width: '20%',

@@ -45,7 +45,7 @@ const ItemHotel = ({ data = {}, index = 0 }) => {
 };
 
 const styles = StyleSheet.create({
-  boxContainer: { marginBottom: 15, width: 165 },
+  boxContainer: { marginBottom: 15, width: 165, marginTop: 20 },
   imgBox: {
     width: 165,
     height: 100,

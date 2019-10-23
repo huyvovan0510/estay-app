@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: 'transparent',
     overflow: 'hidden',
-    height: HEADER_MAX_HEIGHT,
+    height: 50,
   },
   backgroundImage: {
     position: 'absolute',

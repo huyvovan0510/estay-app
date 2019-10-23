@@ -184,14 +184,6 @@ PODS:
     - React-cxxreact (= 0.61.1)
     - React-jsi (= 0.61.1)
   - React-jsinspector (0.61.1)
-  - react-native-camera (3.6.0):
-    - React
-    - react-native-camera/RCT (= 3.6.0)
-    - react-native-camera/RN (= 3.6.0)
-  - react-native-camera/RCT (3.6.0):
-    - React
-  - react-native-camera/RN (3.6.0):
-    - React
   - react-native-maps (0.25.0):
     - React
   - React-RCTActionSheet (0.61.1):
@@ -253,7 +245,6 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -305,8 +296,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
-  react-native-camera:
-    :path: "../node_modules/react-native-camera"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
   React-RCTActionSheet:
@@ -353,7 +342,6 @@ SPEC CHECKSUMS:
   React-jsi: 61ff417c95e6c3af50fb96399037e80752fb5ce7
   React-jsiexecutor: ee45274419eb95614bbbadb98e20684c5f29996e
   React-jsinspector: 574d597112f9ea3d1b717f6fb62aef764c70dd6f
-  react-native-camera: 4f614d2da6526be735ecbe658c3f57eebfb0686a
   react-native-maps: 190c02ca533fddac5bb49cf17bdece3644612107
   React-RCTActionSheet: af4d951113b1e068bb30611f91b984a7a73597ff
   React-RCTAnimation: 4f518d70bb6890b7c3d9d732f84786d6693ca297
@@ -371,4 +359,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ef4afef78fa7e0f945d222cb6763714e7847bff3
 
-COCOAPODS: 1.8.0
+COCOAPODS: 1.8.3

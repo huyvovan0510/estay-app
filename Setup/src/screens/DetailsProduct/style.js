@@ -1,5 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { heightScreen } from '../../comon/Dimensions';
+import { widthScreen } from '@src/comon/Dimensions';
+import Util from '@src/comon/Util';
+const { scale } = Util;
 const styles = StyleSheet.create({
   boxImg: {
     height: heightScreen / 1.5,
@@ -11,13 +14,13 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   hotelName: {
-    marginBottom: 10,
+    marginBottom: scale(10),
     color: '#ffff',
     fontSize: 33,
     fontWeight: '500',
   },
   txtLocation: {
-    marginLeft: 10,
+    marginLeft: scale(10),
     color: '#ffff',
     fontSize: 15,
   },
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   numRate: {
-    marginLeft: 20,
+    marginLeft: scale(20),
     color: '#ffff',
     fontSize: 15,
   },
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  txtCategory: { marginLeft: 20, color: '#ffff', fontSize: 15 },
+  txtCategory: { marginLeft: scale(10), color: '#ffff', fontSize: 15 },
   txtLiner: {
     paddingVertical: heightScreen / 7,
   },
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
   },
   dec: {
     paddingTop: 15,
-    paddingHorizontal: 15,
+    paddingHorizontal: scale(15),
     backgroundColor: '#fff',
     paddingBottom: 50,
   },
@@ -98,24 +101,24 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#000',
     borderRadius: 8,
-    marginRight: 25,
-    paddingVertical: 30,
-    paddingHorizontal: 35,
+    marginRight: scale(25),
+    paddingVertical: scale(30),
+    paddingHorizontal: scale(35),
   },
   txtService: {
     fontWeight: '600',
     fontSize: 18,
   },
   service: {
-    marginVertical: 10,
+    marginVertical: scale(10),
     fontSize: 25,
     lineHeight: 35,
     fontWeight: '500',
   },
   avata: {
-    marginRight: 10,
-    width: 45,
-    height: 45,
+    marginRight: scale(10),
+    width: scale(45),
+    height: scale(45),
     borderRadius: 22,
     backgroundColor: 'red',
   },
@@ -123,12 +126,12 @@ const styles = StyleSheet.create({
   review: {
     fontSize: 25,
     fontWeight: '300',
-    marginBottom: 20,
+    marginBottom: scale(20),
   },
   useName: {
     fontWeight: '500',
     fontSize: 15,
-    lineHeight: 25,
+    lineHeight: scale(25),
   },
   txtContentReviews: {
     color: '#707070',
@@ -136,20 +139,20 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   btnReadAll: {
-    marginTop: 20,
+    marginTop: scale(20),
     alignSelf: 'center',
-    paddingHorizontal: 30,
-    paddingVertical: 15,
+    paddingHorizontal: scale(30),
+    paddingVertical: scale(15),
     borderRadius: 4,
-    borderColor: '#6abd96',
+    borderColor: '#ff1f75',
     borderWidth: 2,
   },
   readAll: {
-    color: '#6abd96',
+    color: '#ff1f75',
   },
   headerDetails: {
     width: '100%',
-    padding: 15,
+    padding: scale(15),
 
     position: 'absolute',
     top: '8%',
@@ -158,7 +161,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   book: {
-    padding: 15,
+    padding: scale(15),
     flexDirection: 'row',
     justifyContent: 'space-around',
     shadowColor: '#000',
@@ -198,6 +201,31 @@ const styles = StyleSheet.create({
   },
   txtbookNow: {
     color: '#ffff',
+  },
+  dailog: {
+    width: widthScreen - 40,
+    height: scale(500),
+    backgroundColor: '#fff',
+    alignSelf: 'center',
+    borderRadius: 8,
+  },
+  btnGoBack: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    padding: 10,
+    borderRadius: 50,
+    backgroundColor: '#fff',
+  },
+  options: {
+    width: '100%',
+
+    backgroundColor: 'red',
   },
 });
 export default styles;

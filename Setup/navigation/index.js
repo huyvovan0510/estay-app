@@ -13,8 +13,8 @@ import Hotel from '@src/screens/ListProduct/Hotel';
 import Setting from '../src/screens/Setting';
 import map from '../src/screens/map';
 import getTabBarIcon from './getBarIcon';
-import Icons from '@src/comon/Icon';
-
+import BookCalendar from '@src/screens/BookCalendar';
+import Confirm from '@src/screens/Confirm';
 const BottomTab = createBottomTabNavigator(
   {
     Home: {
@@ -53,6 +53,12 @@ const Stack = createStackNavigator(
     },
     Hotel: {
       screen: Hotel,
+    },
+    BookCalendar: {
+      screen: BookCalendar,
+    },
+    Confirm_sc: {
+      screen: Confirm,
     },
   },
   {

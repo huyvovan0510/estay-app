@@ -1,24 +1,25 @@
 import { widthScreen, heightScreen } from '../../comon/Dimensions';
 import { StyleSheet } from 'react-native';
+import Util from '@src/comon/Util';
+const { scale } = Util;
 const styles = StyleSheet.create({
   shadow: {
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-
-    elevation: 6,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   boxItem: {
-    marginBottom: 10,
+    marginBottom: scale(10),
     backgroundColor: '#fff',
     borderRadius: 8,
     overflow: 'hidden',
     width: widthScreen / 2.4,
-    height: heightScreen / 3.5,
+    height: scale(230),
   },
   imgBox: {
     flex: 1,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   hotelName: {
-    marginBottom: 5,
+    marginBottom: scale(5),
     color: '#000',
     fontSize: 17,
     fontWeight: '500',
@@ -39,26 +40,26 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   txtLocation: {
-    marginLeft: 5,
+    marginLeft: scale(5),
     fontSize: 10,
     color: '#000',
   },
   textContent: {
     flex: 1,
-    padding: 5,
+    padding: scale(5),
   },
   rowLocation: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: scale(5),
   },
   img: {
     width: '100%',
     height: '100%',
   },
   boxSale: {
-    width: 90,
-    height: 25,
+    width: scale(90),
+    height: scale(25),
     backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',

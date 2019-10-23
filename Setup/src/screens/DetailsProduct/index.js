@@ -5,15 +5,20 @@ import {
   ScrollView,
   ImageBackground,
   FlatList,
+  TouchableOpacity,
+  LayoutAnimation,
+  Platform,
+  UIManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icons from '@src/comon/Icon';
 import styles from './style';
 import { connect } from 'react-redux';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import Modal from 'react-native-modal';
-import { widthScreen, heightScreen } from '@src/comon/Dimensions';
+
 import ContentDailog from '@src/components/ContenDailog';
+import Util from '@src/comon/Util';
 
 const Rooms = [
   { id: '1', room: '102' },
@@ -24,13 +29,17 @@ const Rooms = [
   { id: '6', room: '123' },
   { id: '7', room: '122' },
 ];
+if (
+  Platform.OS === 'android' &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
-  console.log('render');
-
   const item = navigation.state.params;
   const { data } = item;
-  console.log('passingdata', data.id);
-  console.log(dataLiked.id);
+  console.log('dâttatataat', data);
+
   const {
     Price = 0,
     dec = '',
@@ -57,7 +66,6 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
     <View style={{ flex: 1 }}>
       <ScrollView
         onScroll={event => {
-          console.log(event.nativeEvent.contentOffset.y);
           event.nativeEvent.contentOffset.y > 197
             ? setIsDask(true)
             : setIsDask(false);
@@ -69,6 +77,7 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
             style={styles.img}>
             <View style={styles.headerDetails}>
               <TouchableOpacity
+                style={styles.btnGoBack}
                 onPress={() => {
                   navigation.goBack();
                 }}>
@@ -76,20 +85,21 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
                   name="arrow-back"
                   size={25}
                   type={'MaterialIcons'}
-                  color="#ffff"
+                  color="#000"
                 />
               </TouchableOpacity>
               <TouchableOpacity
+                style={styles.btnGoBack}
                 onPress={() => {
+                  LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
                   setIsLove(!isLove);
-                  console.warn(isLove);
                   !isLove ? isLike(data) : unLike(data);
                 }}>
                 <Icons
-                  name="hearto"
+                  name={isLove ? 'heart' : 'hearto'}
                   size={25}
                   type={'AntDesign'}
-                  color={isLove ? '#ff0044' : '#fff'}
+                  color={isLove ? 'red' : '#000'}
                 />
               </TouchableOpacity>
             </View>
@@ -232,20 +242,14 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
               onBackdropPress={() => {
                 setShowRivew(false);
               }}>
-              <View
-                style={{
-                  width: widthScreen - 40,
-                  height: heightScreen - 300,
-                  backgroundColor: '#fff',
-                  alignSelf: 'center',
-                  borderRadius: 8,
-                }}>
+              <View style={styles.dailog}>
                 <ContentDailog />
               </View>
             </Modal>
           </TouchableOpacity>
         </View>
       </ScrollView>
+
       <View
         style={[
           styles.book,
@@ -273,7 +277,17 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
             {Price} VND / Day
           </Text>
         </View>
-        <View
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('BookCalendar', {
+              Price: Price,
+              dec: dec,
+              thumbImg: thumbImg,
+              imgSrc: imgSrc,
+              hotelName: hotelName,
+              location: location,
+            });
+          }}
           style={[
             styles.btnBook,
             {
@@ -284,7 +298,7 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
             style={[styles.txtbookNow, { color: isDask ? '#fff' : '#000' }]}>
             Book Now
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

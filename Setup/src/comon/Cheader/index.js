@@ -1,58 +1,54 @@
-// import React from 'react';
-// import { View, StatusBar, StyleSheet } from 'react-native';
-// import { isDark } from '@Helper/getUI';
-// import { LinearGradient } from 'expo-linear-gradient';
-// import Util from '../Util';
-// import CImage from '../CImage';
+import React from 'react';
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  Platform,
+} from 'react-native';
 
-// const { getStatusBarHeight, getToolbarHeight } = Util;
+import Util from '../Util';
 
-// const heightStatusBar = getStatusBarHeight();
-// const heightToolbar = getToolbarHeight();
-// const styles = StyleSheet.create({
-//   container: {
-//     height: heightStatusBar + heightToolbar,
-//     shadowOpacity: 0.75,
-//     shadowRadius: 5,
-//     shadowColor: '#000',
-//     shadowOffset: { height: 0, width: 0 },
-//   },
-//   content: {
-//     marginTop: heightStatusBar,
-//     flex: 1,
-//   },
-//   linearView: {
-//     flex: 1,
-//   },
-//   bgImg: {
-//     ...StyleSheet.absoluteFill,
-//   },
-// });
+import Icons from '@src/comon/Icon';
+const { scale } = Util;
 
-// function CHeader(props) {
-//   let { bgColor = '#000', bgImage = '' } = props;
-//   return (
-//     <View style={styles.container} elevation={6}>
-//       <LinearGradient
-//         colors={[bgColor, bgColor]}
-//         {...props}
-//         style={styles.linearView}>
-//         <StatusBar
-//           translucent
-//           backgroundColor="transparent"
-//           barStyle={isDark(bgColor) ? 'light-content' : 'dark-content'}
-//         />
-//         {bgImage ? (
-//           <CImage
-//             source={{ uri: bgImage }}
-//             resizeMode="cover"
-//             style={styles.bgImg}
-//           />
-//         ) : null}
-//         <View style={styles.content}>{props.children}</View>
-//       </LinearGradient>
-//     </View>
-//   );
-// }
+function CHeader({ icon, name, navigation }) {
+  return (
+    <View style={styles.header}>
+      <TouchableOpacity
+        style={{ padding: 10 }}
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.goBack();
+        }}>
+        <Icons
+          name={icon}
+          type="MaterialIcons"
+          size={30}
+          style={{ paddingTop: Platform.OS === 'android' ? 0 : scale(23) }}
+        />
+      </TouchableOpacity>
 
-// export default React.memo(CHeader);
+      <Text style={styles.titles}>{name}</Text>
+    </View>
+  );
+}
+const styles = StyleSheet.create({
+  header: {
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: Platform.OS === 'android' ? 'center' : 'flex-end',
+    backgroundColor: '#fff',
+    width: '100%',
+    height: Platform.OS === 'android' ? scale(50) : scale(90),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+  },
+});
+export default React.memo(CHeader);

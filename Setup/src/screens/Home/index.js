@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
 import {
-  StyleSheet,
   View,
   Text,
-  SafeAreaView,
   Image,
   FlatList,
   ScrollView,
-  Animated,
   TouchableOpacity,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
@@ -20,6 +17,8 @@ import ItemProduct_2 from '../../components/ItemProduct_2';
 import Header from '../../comon/Header';
 import styles from './style';
 import { data } from '../../data';
+import Util from '@src/comon/Util';
+const { scale } = Util;
 
 const category = [
   {
@@ -46,6 +45,7 @@ const Home = ({ navigation }) => {
   const _renderSile = ({ item, index }) => {
     return (
       <TouchableOpacity
+        activeOpacity={0.8}
         onPress={() => {
           //navigate to Details product scerren  and pass data
           navigation.push('DetailsProduct', { data: item });
@@ -54,7 +54,7 @@ const Home = ({ navigation }) => {
           source={{ uri: item.imgSrc }}
           style={{
             width: widthScreen,
-            height: heightScreen / 5,
+            height: scale(150),
           }}
         />
       </TouchableOpacity>
@@ -64,6 +64,7 @@ const Home = ({ navigation }) => {
   const _renderItemCategory = (item, index) => {
     return (
       <TouchableOpacity
+        activeOpacity={0.8}
         style={styles.category}
         onPress={() => {
           navigation.push(item.name);
@@ -79,6 +80,7 @@ const Home = ({ navigation }) => {
   const _renderItemProduct = ({ item, index }) => {
     return (
       <TouchableOpacity
+        activeOpacity={0.8}
         style={styles.shadow}
         onPress={() => {
           navigation.push('DetailsProduct', { data: item });
@@ -92,6 +94,7 @@ const Home = ({ navigation }) => {
   const _renderItemProduct_1 = ({ item, index }) => {
     return (
       <TouchableOpacity
+        activeOpacity={0.8}
         style={styles.shadow}
         onPress={() => {
           navigation.push('DetailsProduct', { data: item });
@@ -108,15 +111,16 @@ const Home = ({ navigation }) => {
     // <SafeAreaView style={{backgroundColor: '#f0f0f0'}}>ơ
     <Header>
       <ScrollView
-        style={{ backgroundColor: '#ffff' }}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.boxCarosel}>
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        style={{ backgroundColor: '#ffff' }}>
+        <View style={styles.boxCarưosel}>
           <Carousel
             autoplay
             layout={'default'}
-            ref={c => {
-              this._carousel = c;
-            }}
+            // ref={c => {
+            //   this._carousel = c;
+            // }}
             loop
             data={data}
             renderItem={_renderSile}

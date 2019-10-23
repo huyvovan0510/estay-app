@@ -1,13 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { heightScreen } from '../../comon/Dimensions';
+import Util from '@src/comon/Util';
+const { scale } = Util;
 const styles = StyleSheet.create({
   shadow: {},
   boxItem: {
     backgroundColor: '#ffff',
-    marginVertical: 5,
+    marginVertical: scale(5),
     flexDirection: 'row',
     width: '100%',
-    height: heightScreen / 7,
+    height: scale(100),
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: {
@@ -20,8 +22,8 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   imgContainer: {
-    width: 90,
-    height: 90,
+    width: scale(90),
+    height: scale(90),
   },
 
   thumbImg: {
@@ -29,16 +31,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-
-    margin: 10,
+    margin: scale(10),
   },
 
   container: {
     flex: 1,
-    padding: 10,
+    padding: scale(10),
   },
   hotelName: {
-    marginBottom: 5,
+    marginBottom: scale(5),
     color: '#000',
     fontSize: 17,
     fontWeight: '500',
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   txtLocation: {
-    marginLeft: 5,
+    marginLeft: scale(5),
     fontSize: 10,
     color: '#000',
   },
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   rowLocation: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: scale(5),
   },
   img: {
     width: '100%',

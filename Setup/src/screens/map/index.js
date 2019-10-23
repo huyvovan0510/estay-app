@@ -7,7 +7,9 @@ import { heightScreen } from '@src/comon/Dimensions';
 import ItemLiked from '@src/components/ItemLiked';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const Map = ({ data = [], unLike }) => {
+const Map = ({ data = [], unLike, navigation }) => {
+  let item = navigation.state.params;
+  console.log(item);
   return (
     <View>
       <View style={styles.header}>

@@ -4518,6 +4518,11 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
+
 morgan@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.1.tgz#0a8d16734a1d9afbc824b99df87e738e58e2da59"
@@ -5328,12 +5333,12 @@ react-native-button@^2.3.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-camera@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.6.0.tgz#91f97bbe97345281efb6398bb97d3628bb903a22"
-  integrity sha512-hIcMruSNBw6BA1BJ42nzzxXrydHUuJxwqh6WkZK37P2klxraeC9SkqULAYiq+bsQa0lycA03g/4JSMUZw5wbIg==
+react-native-calendario@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-calendario/-/react-native-calendario-0.3.1.tgz#705cdc3f2ed45b399237f52d876e3e4deab96b60"
+  integrity sha512-EvBGdjCcvYXonRsFoi0MYJCfm+wczjDLqKdwBK0xpTEKlBuujMmILNsGwK0SDmM/JFuGn4U8lethp8MlmoNHDg==
   dependencies:
-    prop-types "^15.6.2"
+    moment "^2.24.0"
 
 react-native-drawer@2.5.1:
   version "2.5.1"

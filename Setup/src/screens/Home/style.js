@@ -1,21 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { widthScreen } from '@src/comon/Dimensions';
+import Util from '@src/comon/Util';
+const { scale } = Util;
 
 const styles = StyleSheet.create({
-  boxCarosel: {
-    marginTop: 3,
-  },
   header: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
+    top: scale(0),
+    left: scale(0),
+    right: scale(0),
     backgroundColor: '#03A9F4',
     overflow: 'hidden',
   },
   bar: {
-    marginTop: 28,
-    height: 32,
+    marginTop: scale(28),
+    height: scale(32),
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -34,23 +33,23 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
 
     elevation: 4,
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: scale(50),
+    height: scale(50),
+    borderRadius: scale(25),
     justifyContent: 'center',
     alignItems: 'center',
   },
   boxCategory: {
-    marginTop: 15,
+    marginTop: scale(15),
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   categoryTitle: {
     color: '#8d8d8d',
-    margin: 5,
+    margin: scale(5),
   },
   BoxTitle: {
-    marginVertical: 10,
+    marginVertical: scale(10),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -65,12 +64,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   container: {
-    paddingHorizontal: 15,
+    paddingHorizontal: scale(15),
   },
   category: {
     alignItems: 'center',
-    width: widthScreen / 3 - 30,
+    width: scale(widthScreen / 3 - 30),
     justifyContent: 'center',
+  },
+  boxCarưosel: {
+    marginTop: Platform.OS === 'ios' ? scale(5) : scale(115),
   },
 });
 export default styles;

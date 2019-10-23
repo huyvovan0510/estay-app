@@ -14,7 +14,7 @@ import Icons from '@src/comon/Icon';
 import styles from './styles';
 
 const HEADER_MAX_HEIGHT = 110;
-const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 80 : 93;
+const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 80 : 50;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 export default class App extends Component {

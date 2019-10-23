@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Icons from '@src/comon/Icon';
 import styles from './style';
 
-const ItemComents = ({ data }) => {
+const ItemComents = ({ data, countStart }) => {
   return (
     <View style={styles.boxReviews}>
       <View style={styles.title}>
@@ -13,8 +13,11 @@ const ItemComents = ({ data }) => {
           <Text style={styles.date}> 2-09-2019</Text>
         </View>
       </View>
-      <View />
       <View style={styles.contentRiviews}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ marginRight: 5 }}>{countStart}</Text>
+          <Icons name="star" type="FontAwesome" size={20} color="#ffe819" />
+        </View>
         <Text style={styles.txtContentReviews} numberOfLines={4}>
           {data.content}
         </Text>

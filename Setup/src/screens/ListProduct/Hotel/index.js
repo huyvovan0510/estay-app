@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -7,34 +7,38 @@ import {
   TouchableOpacity,
   Platform,
   UIManager,
-  LayoutAnimation,
-  Image,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import ItemHotel from '@src/components/ItemHotel';
 import { heightScreen } from '@src/comon/Dimensions';
 import Icons from '@src/comon/Icon';
-
+import Util from '@src/comon/Util';
+const { scale } = Util;
 import { data } from '@src/data';
 
-if (
-  Platform.OS === 'android' &&
-  UIManager.setLayoutAnimationEnabledExperimental
-) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-}
-const Hotel = () => {
+const Hotel = ({ navigation }) => {
   return (
     <View style={styles.contaimer}>
       <View style={styles.header}>
-        <View style={styles.subHeader}>
-          <Icons name="md-arrow-back" type="Ionicons" size={30} />
-          <Text style={styles.titles}>Hotel</Text>
-        </View>
-      </View>
+        <TouchableOpacity
+          style={{ padding: 10 }}
+          activeOpacity={0.7}
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Icons
+            name="md-arrow-back"
+            type="Ionicons"
+            size={30}
+            style={{ paddingTop: Platform.OS === 'android' ? 0 : scale(23) }}
+          />
+        </TouchableOpacity>
 
+        <Text style={styles.titles}>Hotel</Text>
+      </View>
       <View style={styles.content}>
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={data}
           numColumns={2}
           renderItem={({ item, index }) => {
@@ -59,13 +63,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    justifyContent: 'flex-end',
-
-    marginBottom: 20,
-    padding: 15,
-    backgroundColor: '#ffff',
+    marginTop: 20,
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: Platform.OS === 'android' ? 'center' : 'flex-end',
+    backgroundColor: '#fff',
     width: '100%',
-    height: heightScreen / 9,
+    height: Platform.OS === 'android' ? scale(50) : scale(90),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -75,14 +79,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
   },
-  titles: { marginBottom: 20, color: '#000', fontSize: 20, fontWeight: '500' },
-  subHeader: {
-    flexDirection: 'row',
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'red',
-    alignItems: 'flex-end',
-  },
+  titles: { color: '#000', fontSize: 20, fontWeight: '500', marginLeft: 15 },
 });
 
 export default Hotel;

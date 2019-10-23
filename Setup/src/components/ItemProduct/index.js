@@ -5,7 +5,7 @@ import styles from './style';
 import Icon from 'react-native-vector-icons/Entypo';
 const ItemProduct = ({ data }) => {
   return (
-    <TouchableOpacity style={styles.shadow}>
+    <View style={styles.shadow}>
       <ImageBackground style={styles.boxItem} source={{ uri: data.imgSrc }}>
         <LinearGradient
           colors={['transparent', 'rgba(0,0,0,0.9)']}
@@ -22,7 +22,7 @@ const ItemProduct = ({ data }) => {
           </View>
         </LinearGradient>
       </ImageBackground>
-    </TouchableOpacity>
+    </View>
   );
 };
 
