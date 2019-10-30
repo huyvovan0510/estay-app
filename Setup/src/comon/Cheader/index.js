@@ -12,21 +12,23 @@ import Util from '../Util';
 import Icons from '@src/comon/Icon';
 const { scale } = Util;
 
-function CHeader({ icon, name, navigation }) {
+function CHeader({ icon, name, navigation, styless }) {
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, styless]}>
       <TouchableOpacity
         style={{ padding: 10 }}
         activeOpacity={0.7}
         onPress={() => {
           navigation.goBack();
         }}>
-        <Icons
-          name={icon}
-          type="MaterialIcons"
-          size={30}
-          style={{ paddingTop: Platform.OS === 'android' ? 0 : scale(23) }}
-        />
+        {icon ? (
+          <Icons
+            name={icon}
+            type="MaterialIcons"
+            size={30}
+            style={{ paddingTop: Platform.OS === 'android' ? 0 : scale(23) }}
+          />
+        ) : null}
       </TouchableOpacity>
 
       <Text style={styles.titles}>{name}</Text>

@@ -5,9 +5,13 @@ import {
   Text,
   ImageBackground,
   FlatList,
+  StatusBar,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import { heightScreen } from '@src/comon/Dimensions';
 import Icons from '@src/comon/Icon';
+import LinearGradient from 'react-native-linear-gradient';
 const Settig = [
   { id: '1', name: 'Thông tin chi tiết', icon: 'user', type: 'AntDesign' },
   {
@@ -24,51 +28,75 @@ const Settig = [
   },
   { id: '1', name: 'Cài đặt', icon: 'setting', type: 'AntDesign' },
 ];
-const Setting = () => {
+
+const Setting = ({ navigation }) => {
+  const login = false;
+  const _renderItems = ({ item, index }) => {
+    return (
+      <View style={styles.boxItems}>
+        <View style={styles.lefBox}>
+          <Icons name={item.icon} size={30} color="#8a8a8a" type={item.type} />
+          <Text style={styles.txtOptioms}>{item.name}</Text>
+        </View>
+        <Icons name="right" size={25} type="AntDesign" color="#8a8a8a" />
+      </View>
+    );
+  };
+
   return (
-    <View>
-      <View style={styles.header}>
-        <View
-          style={{
-            width: '100%',
-            height: '100%',
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-          }}>
-          <View style={styles.avatar} />
-          <View style={styles.content}>
-            <Text style={styles.userName}>Tên Tài Khoản</Text>
-            <Text style={styles.Wallet}>Ví {0} VND</Text>
+    <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor="transparent" barStyle="light-content" />
+      {!login ? (
+        <View style={styles.Login}>
+          <View
+            style={{
+              width: '100%',
+              height: '100%',
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('@src/assets/img/login.png')}
+              resizeMode="contain"
+              style={{ width: '100%', height: '100%' }}
+            />
+            <View
+              style={{
+                position: 'absolute',
+                bottom: '15%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={styles.txtJonh}>Tham gia ngay với chúng tôi</Text>
+              <TouchableOpacity
+                style={styles.btnLogin}
+                onPress={() => {
+                  navigation.navigate('Login');
+                }}>
+                <Text>Đăng Nhập </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-      <View>
-        <FlatList
-          scrollEnabled={false}
-          data={Settig}
-          renderItem={({ item, index }) => {
-            return (
-              <View style={styles.boxItems}>
-                <View style={styles.lefBox}>
-                  <Icons
-                    name={item.icon}
-                    size={30}
-                    color="#8a8a8a"
-                    type={item.type}
-                  />
-                  <Text style={styles.txtOptioms}>{item.name}</Text>
-                </View>
-                <Icons
-                  name="right"
-                  size={25}
-                  type="AntDesign"
-                  color="#8a8a8a"
-                />
+      ) : (
+        <View>
+          <View style={styles.header}>
+            <View style={styles.useRow}>
+              <View style={styles.avatar} />
+              <View style={styles.content}>
+                <Text style={styles.userName}>Tên Tài Khoản</Text>
+                <Text style={styles.Wallet}>Ví {0} VND</Text>
               </View>
-            );
-          }}
-        />
-      </View>
+            </View>
+          </View>
+          <View>
+            <FlatList
+              scrollEnabled={false}
+              data={Settig}
+              renderItem={_renderItems}
+            />
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -76,8 +104,6 @@ const Setting = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   header: {
     width: '100%',
@@ -124,6 +150,62 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 20,
     marginLeft: 15,
+  },
+  useRow: {
+    width: '100%',
+    height: '100%',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  rowBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  btnLogin: {
+    width: 130,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ff1f75',
+    marginHorizontal: 10,
+    borderRadius: 8,
+  },
+  btnSignIn: {
+    backgroundColor: '#fff',
+    width: 130,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'red',
+    borderWidth: 1,
+    marginHorizontal: 10,
+    borderRadius: 4,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  Login: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  txtLWarning: {
+    fontSize: 20,
+    alignSelf: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  txtJonh: {
+    fontSize: 20,
+    fontWeight: '500',
+    marginBottom: 20,
   },
 });
 

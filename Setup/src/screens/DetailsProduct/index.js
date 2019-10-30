@@ -9,12 +9,13 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
+  StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icons from '@src/comon/Icon';
 import styles from './style';
 import { connect } from 'react-redux';
-
+import RoomOptions from '@src/components/RoomOption';
 import Modal from 'react-native-modal';
 
 import ContentDailog from '@src/components/ContenDailog';
@@ -38,7 +39,6 @@ if (
 const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
   const item = navigation.state.params;
   const { data } = item;
-  console.log('dâttatataat', data);
 
   const {
     Price = 0,
@@ -54,16 +54,14 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
       item.id === data.id ? setIsLove(true) : null;
     });
   }, [data.id, dataLiked, dataLiked.id]);
-  const [id, setId] = useState('');
+
   const [isDask, setIsDask] = useState(false);
   const [isLove, setIsLove] = useState(false);
   const [showRiview, setShowRivew] = useState(false);
-  const getID = id => {
-    setId(id);
-  };
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor="#000" />
       <ScrollView
         onScroll={event => {
           event.nativeEvent.contentOffset.y > 197
@@ -129,36 +127,12 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
             <Icons name="star" size={25} color="#ffff" type="AntDesign" />
             <Text style={styles.numRate}>5.0</Text>
           </View>
-          <Text style={styles.txtRooms}>The rooms we have</Text>
-          <View style={styles.boxRooms}>
-            <FlatList
-              data={Rooms}
-              numColumns={4}
-              renderItem={({ item, index }) => {
-                return (
-                  <TouchableOpacity
-                    onPress={() => {
-                      getID(item.id);
-                    }}>
-                    <View
-                      style={[
-                        styles.btnRooms,
-                        {
-                          borderColor: id === item.id ? '#ffffffff' : '#a8a8a8',
-                        },
-                      ]}>
-                      <Text
-                        style={{
-                          color: id === item.id ? '#ffffffff' : '#a8a8a8',
-                        }}>
-                        {item.room}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              }}
-            />
+          <View style={{ borderBottomWidth: 0.5, borderColor: '#a8a8a8' }}>
+            <RoomOptions Room={Rooms} roomCategory="Standard" />
+            <RoomOptions Room={Rooms} roomCategory="Superior" />
+            <RoomOptions Room={Rooms} roomCategory="Deluxe" />
           </View>
+
           <View style={styles.BoxUnname}>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, paddingVertical: 25, paddingLeft: 5 }}>

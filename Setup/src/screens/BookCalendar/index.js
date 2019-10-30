@@ -5,12 +5,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
+  StatusBar,
 } from 'react-native';
 import Util from '@src/comon/Util';
 import Calendar from '@src/components/Calendar';
 import Cheader from '@src/comon/Cheader';
 const { scale } = Util;
-
 const BookCalendar = ({ navigation }) => {
   let item = navigation.state.params;
   const {
@@ -34,6 +34,7 @@ const BookCalendar = ({ navigation }) => {
   console.warn(BookingDay.current.getDate);
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor="transparent" barStyle="light-content" />
       <Cheader icon={'arrow-back'} name={'Booking'} navigation={navigation} />
       <Calendar onGetTotalDay={onGetTotalDay} onGetStartDay={onGetStartDay} />
       <View style={styles.NextBox}>
@@ -43,16 +44,18 @@ const BookCalendar = ({ navigation }) => {
         <TouchableOpacity
           style={styles.btnNext}
           onPress={() => {
-            navigation.push('Confirm_sc', {
-              Price: Price * totalDay,
-              dec: dec,
-              thumbImg: thumbImg,
-              imgSrc: imgSrc,
-              hotelName: hotelName,
-              location: location,
-              day: totalDay,
-              startDay: startDay,
-            });
+            totalDay > 0
+              ? navigation.push('Confirm_sc', {
+                  Price: Price * totalDay,
+                  dec: dec,
+                  thumbImg: thumbImg,
+                  imgSrc: imgSrc,
+                  hotelName: hotelName,
+                  location: location,
+                  day: totalDay,
+                  startDay: startDay,
+                })
+              : alert('Bạn chưa chọn ngày');
           }}>
           <Text style={styles.txtNext}>Tiếp theo</Text>
         </TouchableOpacity>

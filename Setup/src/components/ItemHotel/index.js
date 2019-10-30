@@ -10,7 +10,7 @@ const ItemHotel = ({ data = {}, index = 0 }) => {
     Price = 0,
     location = '',
   } = data;
-  console.log(data);
+
   return (
     <View
       style={[

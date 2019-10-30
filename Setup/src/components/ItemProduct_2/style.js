@@ -5,11 +5,10 @@ const { scale } = Util;
 const styles = StyleSheet.create({
   shadow: {},
   boxItem: {
-    backgroundColor: '#ffff',
+    backgroundColor: '#fff',
     marginVertical: scale(5),
     flexDirection: 'row',
     width: '100%',
-    height: scale(100),
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: {
@@ -66,6 +65,9 @@ const styles = StyleSheet.create({
   img: {
     width: '100%',
     height: '100%',
+  },
+  txtPrice: {
+    fontWeight: '300',
   },
 });
 export default styles;

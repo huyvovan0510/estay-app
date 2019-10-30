@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, LayoutAnimation } from 'react-native';
 import Icons from '@src/comon/Icon';
 import Util from '@src/comon/Util';
 const { scale } = Util;
@@ -61,13 +61,20 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
       // iconName = focused ? 'apple' : 'apple-pay';
       iconName = 'hearto';
       typeIcon = 'AntDesign';
-      badgeCount = 2;
+      badgeCount = 0;
       // IconComponent = IconWithBadge;
       break;
     case 'Setting':
       // iconName = focused ? 'apple' : 'apple-pay';
       iconName = 'setting';
       typeIcon = 'AntDesign';
+      badgeCount = 0;
+      // IconComponent = IconWithBadge;
+      break;
+    case 'History':
+      // iconName = focused ? 'apple' : 'apple-pay';
+      iconName = 'access-time';
+      typeIcon = 'MaterialIcons';
       badgeCount = 0;
       // IconComponent = IconWithBadge;
       break;
@@ -84,7 +91,7 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
     <IconComponent
       name={iconName}
       typeIcon={typeIcon}
-      size={24}
+      size={focused ? 30 : 23}
       color={tintColor}
       badgeCount={badgeCount}
     />

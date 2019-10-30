@@ -49,9 +49,10 @@ const styles = StyleSheet.create({
     margin: scale(5),
   },
   BoxTitle: {
-    marginVertical: scale(10),
+    marginTop: 30,
+    marginBottom: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+
     alignItems: 'center',
   },
   titleTopHotel: {
@@ -72,7 +73,32 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   boxCarưosel: {
-    marginTop: Platform.OS === 'ios' ? scale(5) : scale(115),
+    // marginTop: Platform.OS === 'ios' ? scale(5) : scale(115),
+  },
+  searchBar: {
+    marginTop: Platform.OS === 'android' ? 0 : scale(35),
+    marginVertical: 10,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ffff',
+    borderRadius: 8,
+    padding: 5,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+  },
+  input: {
+    width: '100%',
+    height: 35,
+    padding: 5,
   },
 });
 export default styles;

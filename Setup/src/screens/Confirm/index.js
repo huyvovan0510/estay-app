@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  StatusBar,
+  Platform,
+} from 'react-native';
 import Util from '@src/comon/Util';
 import moment from 'moment';
 import Cheader from '@src/comon/Cheader';
@@ -16,7 +24,6 @@ const Confirm = ({ navigation }) => {
   const [totalPeople, setTotalPeople] = useState(0);
   const showDaiglog = () => {
     setShowRivew(true);
-    console.warn(showRiview);
   };
   const onGetTotal = num => {
     setShowRivew(false);
@@ -35,6 +42,7 @@ const Confirm = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 25 }}>
+      <StatusBar backgroundColor="transparent" barStyle="light-content" />
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
@@ -89,7 +97,18 @@ const Confirm = ({ navigation }) => {
           navigation={navigation}
         />
       </View>
-      <TouchableOpacity style={styles.btnDone}>
+      <TouchableOpacity
+        style={styles.btnDone}
+        onPress={() => {
+          navigation.navigate('Ticket', {
+            Price,
+            thumbImg,
+            hotelName,
+            location,
+            startDay,
+            totalPeople,
+          });
+        }}>
         <Text style={styles.txtDone}>Done</Text>
       </TouchableOpacity>
     </View>
@@ -97,10 +116,13 @@ const Confirm = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   boxImg: {
+    backgroundColor: 'red',
+    borderRadius: 4,
+    overflow: 'hidden',
     width: '100%',
-    height: scale(200),
+    height: scale(170),
     alignSelf: 'center',
-    paddingVertical: scale(20),
+    marginVertical: 20,
   },
 
   nameHotel: {
@@ -132,7 +154,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   header: {
-    marginTop: 35,
+    marginTop: Platform.OS === 'android' ? scale(5) : scale(35),
     flexDirection: 'row',
     alignItems: 'center',
   },

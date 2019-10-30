@@ -3,7 +3,6 @@ import {
   createAppContainer,
   createBottomTabNavigator,
   createStackNavigator,
-  createDrawerNavigator,
   createSwitchNavigator,
 } from 'react-navigation';
 import Home from '../src/screens/Home';
@@ -15,6 +14,10 @@ import map from '../src/screens/map';
 import getTabBarIcon from './getBarIcon';
 import BookCalendar from '@src/screens/BookCalendar';
 import Confirm from '@src/screens/Confirm';
+import Ticket from '@src/screens/Ticket';
+import History from '@src/screens/history';
+import HomeStay from '@src/screens/ListProduct/HomeSay';
+import Motel from '@src/screens/ListProduct/Motel';
 const BottomTab = createBottomTabNavigator(
   {
     Home: {
@@ -22,6 +25,9 @@ const BottomTab = createBottomTabNavigator(
     },
     map: {
       screen: map,
+    },
+    History: {
+      screen: History,
     },
     Setting: {
       screen: Setting,
@@ -60,11 +66,28 @@ const Stack = createStackNavigator(
     Confirm_sc: {
       screen: Confirm,
     },
+    HomeStay: {
+      screen: HomeStay,
+    },
+    Motel: {
+      screen: Motel,
+    },
   },
   {
     headerMode: 'none',
   },
 );
+const Swich = createSwitchNavigator({
+  Stack: {
+    screen: Stack,
+  },
+  Ticket: {
+    screen: Ticket,
+  },
+  Login: {
+    screen: Login,
+  },
+});
 
-const AppNavigation = createAppContainer(Stack);
+const AppNavigation = createAppContainer(Swich);
 export default AppNavigation;

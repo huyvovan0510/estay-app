@@ -15,15 +15,24 @@ const styles = StyleSheet.create({
   },
   boxItem: {
     marginBottom: scale(10),
-    backgroundColor: '#fff',
+    backgroundColor: '#ffff',
     borderRadius: 8,
     overflow: 'hidden',
     width: widthScreen / 2.4,
-    height: scale(230),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   imgBox: {
-    flex: 1,
-    backgroundColor: 'red',
+    overflow: 'hidden',
+    borderRadius: 8,
+    width: widthScreen / 2.4,
+    height: scale(90),
   },
   comtentBox: {
     flex: 1,
@@ -41,7 +50,8 @@ const styles = StyleSheet.create({
   },
   txtLocation: {
     marginLeft: scale(5),
-    fontSize: 10,
+    fontSize: 12,
+    fontWeight: '300',
     color: '#000',
   },
   textContent: {
@@ -51,7 +61,6 @@ const styles = StyleSheet.create({
   rowLocation: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: scale(5),
   },
   img: {
     width: '100%',
@@ -67,6 +76,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: '-10%',
+  },
+  txtPrice: {
+    marginLeft: scale(5),
+    fontWeight: '300',
+    fontSize: 15,
+    color: '#000',
+    marginVertical: 5,
   },
 });
 export default styles;

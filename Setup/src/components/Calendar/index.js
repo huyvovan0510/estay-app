@@ -12,7 +12,7 @@ const itemCalendar = React.memo(({ onGetTotalDay, onGetStartDay }) => {
           onGetStartDay(range);
           let startDay = moment(range.startDate);
           let endDay = moment(range.endDate);
-          let total = endDay.diff(startDay, 'day') + 1;
+          let total = endDay.diff(startDay, 'day');
           if (onGetTotalDay) {
             onGetTotalDay(total || 1);
           }

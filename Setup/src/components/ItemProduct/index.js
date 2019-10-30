@@ -12,13 +12,13 @@ const ItemProduct = ({ data }) => {
           styles={styles.Liner}>
           <View style={{ paddingHorizontal: 10 }}>
             <Text style={styles.hotelName}>Sontana Hotel</Text>
-            <Text numberOfLines={4} style={styles.decHotel}>
-              {data.dec}
-            </Text>
             <View style={styles.rowLocation}>
               <Icon name="location-pin" size={15} color="#fff" />
               <Text style={styles.txtLocation}>{data.location}</Text>
             </View>
+            <Text numberOfLines={4} style={styles.prrice}>
+              {data.Price + ' Vnd / Day'}
+            </Text>
           </View>
         </LinearGradient>
       </ImageBackground>

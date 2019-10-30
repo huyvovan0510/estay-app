@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { heightScreen } from '../../comon/Dimensions';
 import { widthScreen } from '@src/comon/Dimensions';
 import Util from '@src/comon/Util';
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   rowRate: {
+    paddingBottom: 10,
     flexDirection: 'row',
     borderColor: '#4f4e4e',
     borderBottomWidth: 1,
@@ -61,17 +62,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  btnRooms: { margin: 5, padding: 8, borderWidth: 1, borderRadius: 4 },
-  txtRooms: {
-    color: '#fff',
-    fontSize: 19,
-    fontWeight: '500',
-  },
-  boxRooms: {
-    borderBottomWidth: 1,
-    borderColor: '#4f4e4e',
-    paddingBottom: 5,
-  },
+
   roomStatus: {
     marginTop: 10,
     color: '#a8a8a8',
@@ -153,9 +144,8 @@ const styles = StyleSheet.create({
   headerDetails: {
     width: '100%',
     padding: scale(15),
-
     position: 'absolute',
-    top: '8%',
+    top: Platform.OS === 'ios' ? '8%' : '3%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

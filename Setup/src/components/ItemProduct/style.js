@@ -34,10 +34,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '500',
   },
-  decHotel: {
+  prrice: {
     color: '#ffff',
-    fontWeight: '300',
-    fontSize: 10,
+    fontWeight: '500',
+    fontSize: 15,
+    paddingBottom: 10,
   },
   txtLocation: {
     marginLeft: scale(5),

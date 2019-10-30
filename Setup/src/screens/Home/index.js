@@ -6,7 +6,10 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  StatusBar,
+  TextInput,
 } from 'react-native';
+import Icons from '@src/comon/Icon';
 import Carousel from 'react-native-snap-carousel';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -15,6 +18,7 @@ import ItemProduct from '../../components/ItemProduct';
 import ItemProduct_1 from '../../components/ItemProdcut_1';
 import ItemProduct_2 from '../../components/ItemProduct_2';
 import Header from '../../comon/Header';
+import CTitle from '@src/comon/CTitle';
 import styles from './style';
 import { data } from '../../data';
 import Util from '@src/comon/Util';
@@ -108,8 +112,28 @@ const Home = ({ navigation }) => {
   };
 
   return (
-    // <SafeAreaView style={{backgroundColor: '#f0f0f0'}}>ơ
-    <Header>
+    // <Header>
+    <View style={{ flex: 1 }}>
+      {/* <Text
+        style={{
+          fontSize: 20,
+          fontWeight: '500',
+          alignSelf: 'center',
+          lineHeight: 22,
+          marginVertical: 20,
+          backgroundColor: 'transparent',
+        }}>
+        Logo
+      </Text> */}
+      <TouchableOpacity style={styles.searchBar}>
+        <Icons name="search1" size={21} color={'#000'} type="AntDesign" />
+        <TextInput
+          style={styles.input}
+          blurOnSubmit
+          placeholder="Where are you  ?"
+        />
+      </TouchableOpacity>
+      <StatusBar backgroundColor="transparent" barStyle="light-content" />
       <ScrollView
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
@@ -134,12 +158,7 @@ const Home = ({ navigation }) => {
           <View style={styles.boxCategory}>
             {category.map(_renderItemCategory)}
           </View>
-          <View style={styles.topHotel}>
-            <View style={styles.BoxTitle}>
-              <Text style={styles.titleTopHotel}>Top Hotel</Text>
-              <Text style={styles.txtViewMore}>View More</Text>
-            </View>
-          </View>
+          <CTitle title="Hot Hotel" color="red" size={16} />
           <View style={{}}>
             <FlatList
               showsHorizontalScrollIndicator={false}
@@ -151,12 +170,7 @@ const Home = ({ navigation }) => {
               }}
             />
           </View>
-          <View style={styles.homeStay}>
-            <View style={styles.BoxTitle}>
-              <Text style={styles.titleTopHotel}>Home Stay</Text>
-              <Text style={styles.txtViewMore}>View More</Text>
-            </View>
-          </View>
+          <CTitle title="Home Stay" color="red" size={16} />
           <View style={{ alignItems: 'center', flex: 1 }}>
             <FlatList
               showsHorizontalScrollIndicator={false}
@@ -168,6 +182,7 @@ const Home = ({ navigation }) => {
               }}
             />
           </View>
+          <CTitle title="Motel" color="red" size={16} />
           <FlatList
             showsHorizontalScrollIndicator={false}
             numColumns={2}
@@ -176,8 +191,8 @@ const Home = ({ navigation }) => {
           />
         </View>
       </ScrollView>
-    </Header>
-    // </SafeAreaView>
+    </View>
+    // </Header>
   );
 };
 

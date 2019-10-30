@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './styles';
-import Icon from 'react-native-vector-icons/Entypo';
+import Icons from '@src/comon/Icon';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ItemProduct_1 = ({ data, index, navigation }) => {
@@ -30,12 +30,23 @@ const ItemProduct_1 = ({ data, index, navigation }) => {
         <View style={styles.comtentBox}>
           <View style={styles.textContent}>
             <Text style={styles.hotelName}>Sontana Hotel</Text>
-            <Text numberOfLines={4} style={styles.decHotel}>
-              {data.dec}
-            </Text>
             <View style={styles.rowLocation}>
-              <Icon name="location-pin" size={15} color="#000" />
+              <Icons name="home" size={15} color="#000" type="AntDesign" />
+              <Text style={styles.txtCategory}>{'Hotel'}</Text>
+            </View>
+            <View style={styles.rowLocation}>
+              <Icons name="location-pin" size={15} color="#000" type="Entypo" />
               <Text style={styles.txtLocation}>{data.location}</Text>
+            </View>
+
+            <View style={styles.rowLocation}>
+              <Icons
+                name="attach-money"
+                size={15}
+                color="#000"
+                type="MaterialIcons"
+              />
+              <Text style={styles.txtPrice}>{data.Price + ' / Ngày'}</Text>
             </View>
           </View>
         </View>

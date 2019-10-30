@@ -18,13 +18,14 @@ const ItemProduct = ({ data }) => {
       <View style={styles.container}>
         <View style={styles.textContent}>
           <Text style={styles.hotelName}>Sontana Hotel</Text>
-          <Text numberOfLines={3} style={styles.decHotel}>
-            {data.dec}
-          </Text>
+          <Text style={styles.txtPrice}>{data.Price + ' / Ngày'}</Text>
           <View style={styles.rowLocation}>
             <Icon name="location-pin" size={15} color="#000" />
             <Text style={styles.txtLocation}>{data.location}</Text>
           </View>
+          <Text numberOfLines={3} style={styles.decHotel}>
+            {data.dec}
+          </Text>
         </View>
       </View>
     </View>

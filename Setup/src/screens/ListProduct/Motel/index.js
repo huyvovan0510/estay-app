@@ -9,7 +9,7 @@ import {
   UIManager,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import ItemHotel from '@src/components/ItemHotel';
+import ItemProdcut_2 from '@src/components/ItemProduct_2';
 import { heightScreen } from '@src/comon/Dimensions';
 import Icons from '@src/comon/Icon';
 import Util from '@src/comon/Util';
@@ -34,20 +34,19 @@ const Motel = ({ navigation }) => {
           />
         </TouchableOpacity>
 
-        <Text style={styles.titles}>Hotel</Text>
+        <Text style={styles.titles}>Motel</Text>
       </View>
       <View style={styles.content}>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={data}
-          numColumns={2}
           renderItem={({ item, index }) => {
             return (
               <TouchableOpacity
                 onPress={() => {
                   navigation.push('DetailsProduct', { data: item });
                 }}>
-                <ItemHotel data={item} index={index} />
+                <ItemProdcut_2 data={item} index={index} />
               </TouchableOpacity>
             );
           }}
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    alignItems: 'center',
+    paddingHorizontal: 15,
   },
   header: {
     marginTop: 20,

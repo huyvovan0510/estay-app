@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Image } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  StatusBar,
+  LayoutAnimation,
+} from 'react-native';
 import { connect } from 'react-redux';
 import Icons from '@src/comon/Icon';
+import Cheader from '@src/comon/Cheader';
 import { heightScreen } from '@src/comon/Dimensions';
 
 import ItemLiked from '@src/components/ItemLiked';
@@ -9,14 +16,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const Map = ({ data = [], unLike, navigation }) => {
   let item = navigation.state.params;
-  console.log(item);
+  useEffect(() => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+  });
   return (
-    <View>
-      <View style={styles.header}>
-        <View style={styles.subHeader}>
-          <Text style={styles.title}>Yêu Thích</Text>
-        </View>
-      </View>
+    <View style={styles.contaimer}>
+      <StatusBar backgroundColor="transparent" barStyle="light-content" />
+      <Cheader name={'Yêu Thích'} navigation={navigation} />
       {data.length > 0 ? (
         <ScrollView>
           {data.map((item, index) => {
@@ -24,14 +30,14 @@ const Map = ({ data = [], unLike, navigation }) => {
           })}
         </ScrollView>
       ) : (
-        <View style={styles.contaimer}>
-          <Image
-            source={{
-              uri:
-                'https://i.pinimg.com/originals/1e/88/f0/1e88f00bcff87cfae46b49162ab92557.gif',
-            }}
-            style={{ width: '70%', height: '70%' }}
-          />
+        <View style={{ width: '100%', height: '100%' }}>
+          <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
+            <Image
+              source={require('@src/assets/img/emptyScreen.png')}
+              resizeMode="contain"
+              style={{ width: '100%', height: '100%' }}
+            />
+          </View>
         </View>
       )}
     </View>
@@ -39,11 +45,7 @@ const Map = ({ data = [], unLike, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  contaimer: {
-    height: heightScreen,
-
-    alignItems: 'center',
-  },
+  contaimer: { flex: 1 },
   header: {
     padding: 15,
     backgroundColor: '#ffff',

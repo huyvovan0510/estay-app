@@ -1,7 +1,6 @@
 import { LIKED, UNLIKE } from '../action/type';
 
 const Like = (state = [], action) => {
-  console.log('aaaaa', action.data);
   switch (action.type) {
     case LIKED:
       let newLikeItem = [action.data];

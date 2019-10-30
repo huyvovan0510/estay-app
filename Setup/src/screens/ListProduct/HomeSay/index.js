@@ -9,14 +9,14 @@ import {
   UIManager,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import ItemHotel from '@src/components/ItemHotel';
+import ItemProdcut_1 from '@src/components/ItemProdcut_1';
 import { heightScreen } from '@src/comon/Dimensions';
 import Icons from '@src/comon/Icon';
 import Util from '@src/comon/Util';
 const { scale } = Util;
 import { data } from '@src/data';
 
-const Motel = ({ navigation }) => {
+const HomeStay = ({ navigation }) => {
   return (
     <View style={styles.contaimer}>
       <View style={styles.header}>
@@ -34,7 +34,7 @@ const Motel = ({ navigation }) => {
           />
         </TouchableOpacity>
 
-        <Text style={styles.titles}>Hotel</Text>
+        <Text style={styles.titles}>HomeStay</Text>
       </View>
       <View style={styles.content}>
         <FlatList
@@ -47,7 +47,7 @@ const Motel = ({ navigation }) => {
                 onPress={() => {
                   navigation.push('DetailsProduct', { data: item });
                 }}>
-                <ItemHotel data={item} index={index} />
+                <ItemProdcut_1 data={item} index={index} />
               </TouchableOpacity>
             );
           }}
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
   titles: { color: '#000', fontSize: 20, fontWeight: '500', marginLeft: 15 },
 });
 
-export default Motel;
+export default HomeStay;
