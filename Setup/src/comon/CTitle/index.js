@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, IManager } from 'react-native';
-import ItemProdcut_1 from '@src/components/ItemProdcut_1';
+import ItemProdcut_1 from '@src/components/ItemMotel';
 import { heightScreen } from '@src/comon/Dimensions';
 import Icons from '@src/comon/Icon';
 import Util from '@src/comon/Util';

@@ -41,9 +41,8 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
   const { data } = item;
 
   const {
-    Price = 0,
+    price = 0,
     dec = '',
-    thumbImg = '',
     imgSrc = '',
     hotelName = 'Sontana Hotel',
     location = '',
@@ -70,7 +69,7 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
         }}>
         <View style={styles.boxImg}>
           <ImageBackground
-            source={{ uri: thumbImg }}
+            source={{ uri: imgSrc }}
             resizeMode="cover"
             style={styles.img}>
             <View style={styles.headerDetails}>
@@ -248,15 +247,15 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
               },
               styles.numPrice,
             ]}>
-            {Price} VND / Day
+            {price} VND / Day
           </Text>
         </View>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('BookCalendar', {
-              Price: Price,
+              Price: price,
               dec: dec,
-              thumbImg: thumbImg,
+              thumbImg: imgSrc,
               imgSrc: imgSrc,
               hotelName: hotelName,
               location: location,

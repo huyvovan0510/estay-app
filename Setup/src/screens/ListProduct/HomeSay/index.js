@@ -9,7 +9,7 @@ import {
   UIManager,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import ItemProdcut_1 from '@src/components/ItemProdcut_1';
+import ItemProdcut_1 from '@src/components/ItemMotel';
 import { heightScreen } from '@src/comon/Dimensions';
 import Icons from '@src/comon/Icon';
 import Util from '@src/comon/Util';

@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* SetupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SetupTests.m */; };
 		032E1F1F9BE640EB95860809 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 783B04396DDE45129E07F1BA /* Feather.ttf */; };
@@ -26,6 +27,12 @@
 		645CE37345F04036A393272D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38B01AC89D8E479E997FDFE8 /* SimpleLineIcons.ttf */; };
 		6F29B746E3104EB2A9A0564A /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3568BF51A4E4B8FA042C9C4 /* Entypo.ttf */; };
 		9A73395445454A278C43DEF5 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C7DA9DF356E48D1AE6EEAAF /* FontAwesome5_Regular.ttf */; };
+		9BAEA45E237D5C4000B5C8AF /* liblottie-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAEA45D237D5C4000B5C8AF /* liblottie-ios.a */; };
+		9BAEA460237D5DC100B5C8AF /* liblottie-react-native.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAEA45F237D5DC100B5C8AF /* liblottie-react-native.a */; };
+		9BB9782A237FE4FC00A45C7F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB97829237FE4FC00A45C7F /* File.swift */; };
+		9BB9782B237FE4FC00A45C7F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB97829237FE4FC00A45C7F /* File.swift */; };
+		9BB9782C237FE4FC00A45C7F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB97829237FE4FC00A45C7F /* File.swift */; };
+		9BB9782D237FE4FC00A45C7F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB97829237FE4FC00A45C7F /* File.swift */; };
 		A0A0F11337F340D1BCA181E8 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B51F31CA40524E67A1FC3FC5 /* MaterialCommunityIcons.ttf */; };
 		A1A047C4A9E546BCB7BEF300 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94C0BEADF83F4E9EB5E5CF47 /* rubicon-icon-font.ttf */; };
 		AE332017E9AE4AEC9F7765F2 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96C358E32A574B58AFFE8C7F /* Roboto.ttf */; };
@@ -93,6 +100,13 @@
 		94C0BEADF83F4E9EB5E5CF47 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
 		96C358E32A574B58AFFE8C7F /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		99E60D844A31487AB1615A8D /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		9BAEA45D237D5C4000B5C8AF /* liblottie-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblottie-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BAEA45F237D5DC100B5C8AF /* liblottie-react-native.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblottie-react-native.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BB97825237FE4FC00A45C7F /* Setup-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Setup-Bridging-Header.h"; sourceTree = "<group>"; };
+		9BB97826237FE4FC00A45C7F /* SetupTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SetupTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		9BB97827237FE4FC00A45C7F /* Setup-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Setup-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		9BB97828237FE4FC00A45C7F /* Setup-tvOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Setup-tvOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		9BB97829237FE4FC00A45C7F /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		9E203F4D4FE6B708C50B768F /* Pods-Setup-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Setup-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Setup-tvOSTests/Pods-Setup-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA3608AD052645F59AD5CEEA /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		B4E63373A7F791C049FD29E0 /* libPods-SetupTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SetupTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +135,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BAEA460237D5DC100B5C8AF /* liblottie-react-native.a in Frameworks */,
+				9BAEA45E237D5C4000B5C8AF /* liblottie-ios.a in Frameworks */,
 				CDAB33B523451649003D6CC2 /* libBVLinearGradient.a in Frameworks */,
 				C4E0229C1F556F604A84E49D /* libPods-Setup.a in Frameworks */,
 			);
@@ -179,6 +195,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9BAEA45F237D5DC100B5C8AF /* liblottie-react-native.a */,
+				9BAEA45D237D5C4000B5C8AF /* liblottie-ios.a */,
 				CDAB33B423451649003D6CC2 /* libBVLinearGradient.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
@@ -226,6 +244,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9BB97829237FE4FC00A45C7F /* File.swift */,
 				13B07FAE1A68108700A75B9A /* Setup */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SetupTests */,
@@ -233,6 +252,10 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				B4762AB7955038545DC15710 /* Pods */,
 				630B83FDD1214E87BE891D22 /* Resources */,
+				9BB97825237FE4FC00A45C7F /* Setup-Bridging-Header.h */,
+				9BB97826237FE4FC00A45C7F /* SetupTests-Bridging-Header.h */,
+				9BB97827237FE4FC00A45C7F /* Setup-tvOS-Bridging-Header.h */,
+				9BB97828237FE4FC00A45C7F /* Setup-tvOSTests-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -358,14 +381,20 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 1010;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1010;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -657,6 +686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* SetupTests.m in Sources */,
+				9BB9782B237FE4FC00A45C7F /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +695,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				9BB9782A237FE4FC00A45C7F /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -674,6 +705,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
+				9BB9782C237FE4FC00A45C7F /* File.swift in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -683,6 +715,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DCD954D1E0B4F2C00145EB5 /* SetupTests.m in Sources */,
+				9BB9782D237FE4FC00A45C7F /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,7 +751,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5918826A0F312C4621B9F054 /* Pods-SetupTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -733,6 +768,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SetupTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setup.app/Setup";
 			};
 			name = Debug;
@@ -741,7 +779,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F10E823FBE575E4D5811048D /* Pods-SetupTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = SetupTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -753,6 +793,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SetupTests-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setup.app/Setup";
 			};
 			name = Release;
@@ -761,9 +803,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7CBC384D9F2DAD708570CD36 /* Pods-Setup.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Setup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -773,6 +818,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Setup;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Setup-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -781,8 +830,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 53D4B867263701C8F79DBF19 /* Pods-Setup.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"BUNDLE_LOADER[arch=*]" = "";
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Setup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -792,6 +845,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Setup;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Setup-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -803,6 +859,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -819,6 +876,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Setup-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Setup-tvOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -831,6 +891,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -847,6 +908,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Setup-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Setup-tvOS-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -856,8 +919,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9E203F4D4FE6B708C50B768F /* Pods-Setup-tvOSTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -874,6 +939,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Setup-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Setup-tvOSTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setup-tvOS.app/Setup-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
@@ -883,8 +951,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57EC84D72D3DA2108F653E1E /* Pods-Setup-tvOSTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -901,6 +971,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Setup-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Setup-tvOSTests-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Setup-tvOS.app/Setup-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};

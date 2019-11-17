@@ -4,12 +4,7 @@ import Icons from '@src/comon/Icon';
 import { heightScreen } from '@src/comon/Dimensions';
 
 const ItemHotel = ({ data = {}, index = 0 }) => {
-  const {
-    thumbImg = '',
-    hotelName = 'Sontana Hotel',
-    Price = 0,
-    location = '',
-  } = data;
+  const { category, hotelName, id, imgSrc, price, dec, location } = data;
 
   return (
     <View
@@ -23,14 +18,14 @@ const ItemHotel = ({ data = {}, index = 0 }) => {
       ]}>
       <View style={styles.imgBox}>
         <Image
-          source={{ uri: thumbImg }}
+          source={{ uri: imgSrc }}
           resizeMode="cover"
           style={{ width: '100%', height: '100%' }}
         />
       </View>
       <View style={styles.contentBox}>
         <Text style={styles.hotelName}>{hotelName}</Text>
-        <Text style={styles.price}>{Price} / day</Text>
+        <Text style={styles.price}>{price} / day</Text>
         <View style={styles.rowCategory}>
           <Icons name="hotel" size={15} color="#000" type="FontAwesome5" />
           <Text style={styles.txtCategory}>{hotelName}</Text>

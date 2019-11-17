@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -15,13 +15,14 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { widthScreen, heightScreen } from '../../comon/Dimensions';
 import ItemProduct from '../../components/ItemProduct';
-import ItemProduct_1 from '../../components/ItemProdcut_1';
+import ItemMotel from '../../components/ItemMotel';
 import ItemProduct_2 from '../../components/ItemProduct_2';
 import Header from '../../comon/Header';
 import CTitle from '@src/comon/CTitle';
 import styles from './style';
 import { data } from '../../data';
 import Util from '@src/comon/Util';
+import LoadingSC from '@src/comon/LoadingSc';
 const { scale } = Util;
 
 const category = [
@@ -46,6 +47,28 @@ const category = [
 ];
 
 const Home = ({ navigation }) => {
+  const [hotelsData, setHotelsData] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
+  const getdata = () => {
+    setLoading(true);
+    fetch('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotles')
+      .then(response => response.json())
+      .then(responseJson => {
+        setHotelsData(responseJson);
+        setTimeout(() => {
+          setLoading(false);
+        }, 4000);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    getdata();
+  }, []);
+
   const _renderSile = ({ item, index }) => {
     return (
       <TouchableOpacity
@@ -95,7 +118,7 @@ const Home = ({ navigation }) => {
   };
 
   //render
-  const _renderItemProduct_1 = ({ item, index }) => {
+  const _renderItemMotel = ({ item, index }) => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
@@ -103,97 +126,102 @@ const Home = ({ navigation }) => {
         onPress={() => {
           navigation.push('DetailsProduct', { data: item });
         }}>
-        <ItemProduct_1 data={item} index={index} />
+        <ItemMotel data={item} index={index} />
       </TouchableOpacity>
     );
   };
   const _renderItemProduct_2 = ({ item, index }) => {
     return <ItemProduct_2 data={item} />;
   };
-
-  return (
-    // <Header>
-    <View style={{ flex: 1 }}>
-      {/* <Text
-        style={{
-          fontSize: 20,
-          fontWeight: '500',
-          alignSelf: 'center',
-          lineHeight: 22,
-          marginVertical: 20,
-          backgroundColor: 'transparent',
-        }}>
-        Logo
-      </Text> */}
-      <TouchableOpacity style={styles.searchBar}>
-        <Icons name="search1" size={21} color={'#000'} type="AntDesign" />
-        <TextInput
-          style={styles.input}
-          blurOnSubmit
-          placeholder="Where are you  ?"
-        />
-      </TouchableOpacity>
-      <StatusBar backgroundColor="transparent" barStyle="light-content" />
-      <ScrollView
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        style={{ backgroundColor: '#ffff' }}>
-        <View style={styles.boxCarưosel}>
-          <Carousel
-            autoplay
-            layout={'default'}
-            // ref={c => {
-            //   this._carousel = c;
-            // }}
-            loop
-            data={data}
-            renderItem={_renderSile}
-            sliderWidth={widthScreen}
-            itemWidth={widthScreen}
-            itemHeight={heightScreen / 4}
-            sliderHeight={heightScreen / 5}
+  if (isLoading === true) {
+    return <LoadingSC />;
+  } else {
+    return (
+      // <Header>
+      <View style={{ flex: 1 }}>
+        {/* <Text
+          style={{
+            fontSize: 20,
+            fontWeight: '500',
+            alignSelf: 'center',
+            lineHeight: 22,
+            marginVertical: 20,
+            backgroundColor: 'transparent',
+          }}>
+          Logo
+        </Text> */}
+        <TouchableOpacity style={styles.searchBar}>
+          <Icons name="search1" size={21} color={'#000'} type="AntDesign" />
+          <TextInput
+            style={styles.input}
+            blurOnSubmit
+            placeholder="Where are you  ?"
           />
-        </View>
-        <View style={styles.container}>
-          <View style={styles.boxCategory}>
-            {category.map(_renderItemCategory)}
-          </View>
-          <CTitle title="Hot Hotel" color="red" size={16} />
-          <View style={{}}>
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              horizontal
+        </TouchableOpacity>
+        <StatusBar backgroundColor="transparent" barStyle="light-content" />
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          style={{ backgroundColor: '#ffff' }}>
+          <View style={styles.boxCarưosel}>
+            <Carousel
+              autoplay
+              layout={'default'}
+              // ref={c => {
+              //   this._carousel = c;
+              // }}
+              loop
               data={data}
-              renderItem={_renderItemProduct}
-              keyExtractor={item => {
-                item.id;
-              }}
+              renderItem={_renderSile}
+              sliderWidth={widthScreen}
+              itemWidth={widthScreen}
+              itemHeight={heightScreen / 4}
+              sliderHeight={heightScreen / 5}
             />
           </View>
-          <CTitle title="Home Stay" color="red" size={16} />
-          <View style={{ alignItems: 'center', flex: 1 }}>
+          <View style={styles.container}>
+            <View style={styles.boxCategory}>
+              {category.map(_renderItemCategory)}
+            </View>
+            <CTitle title="Hot Hotel" color="red" size={16} />
+            <View style={{}}>
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                data={hotelsData}
+                renderItem={_renderItemProduct}
+                keyExtractor={item => {
+                  item.id;
+                }}
+              />
+            </View>
+            <CTitle title="Motel" color="red" size={16} />
+            <View style={{ alignItems: 'center', flex: 1 }}>
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                numColumns={2}
+                data={hotelsData.filter(item => {
+                  return item.category === 'Hotel';
+                })}
+                renderItem={_renderItemMotel}
+                keyExtractor={item => {
+                  item.id;
+                }}
+              />
+            </View>
+            <CTitle title="Home Stay" color="red" size={16} />
             <FlatList
               showsHorizontalScrollIndicator={false}
               numColumns={2}
-              data={data}
-              renderItem={_renderItemProduct_1}
-              keyExtractor={item => {
-                item.id;
-              }}
+              data={hotelsData}
+              renderItem={_renderItemProduct_2}
             />
           </View>
-          <CTitle title="Motel" color="red" size={16} />
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            numColumns={2}
-            data={data}
-            renderItem={_renderItemProduct_2}
-          />
-        </View>
-      </ScrollView>
-    </View>
-    // </Header>
-  );
+        </ScrollView>
+      </View>
+      // </Header>
+    );
+  }
 };
 
 export default Home;

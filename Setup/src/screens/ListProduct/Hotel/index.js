@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -17,6 +17,28 @@ const { scale } = Util;
 import { data } from '@src/data';
 
 const Motel = ({ navigation }) => {
+  const [hotelsData, setHotelsData] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
+  const getdata = () => {
+    setLoading(true);
+    fetch('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotles')
+      .then(response => response.json())
+      .then(responseJson => {
+        setHotelsData(responseJson);
+        setTimeout(() => {
+          setLoading(false);
+        }, 4000);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    getdata();
+  }, []);
+
   return (
     <View style={styles.contaimer}>
       <View style={styles.header}>
@@ -39,7 +61,9 @@ const Motel = ({ navigation }) => {
       <View style={styles.content}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={data}
+          data={hotelsData.filter(item => {
+            return item.category === 'Hotel';
+          })}
           numColumns={2}
           renderItem={({ item, index }) => {
             return (
