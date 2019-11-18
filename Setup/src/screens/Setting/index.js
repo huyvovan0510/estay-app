@@ -72,7 +72,7 @@ const Setting = ({ navigation }) => {
                 onPress={() => {
                   navigation.navigate('Login');
                 }}>
-                <Text>Đăng Nhập </Text>
+                <Text style={styles.txtLogin}>Đăng Nhập </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -206,6 +206,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
     marginBottom: 20,
+  },
+  txtLogin: {
+    color: '#ffff',
+    fontWeight: '500',
   },
 });
 

@@ -24,7 +24,7 @@ function CHeader({ icon, name, navigation, styless }) {
         {icon ? (
           <Icons
             name={icon}
-            type="MaterialIcons"
+            type="Entypo"
             size={30}
             style={{ paddingTop: Platform.OS === 'android' ? 0 : scale(23) }}
           />

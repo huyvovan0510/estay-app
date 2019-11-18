@@ -5,17 +5,15 @@ import {
   Image,
   StatusBar,
   LayoutAnimation,
+  TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Icons from '@src/comon/Icon';
 import Cheader from '@src/comon/Cheader';
 import { heightScreen } from '@src/comon/Dimensions';
-
 import ItemLiked from '@src/components/ItemLiked';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import LottieView from 'lottie-react-native';
 const Map = ({ data = [], unLike, navigation }) => {
-  let item = navigation.state.params;
   useEffect(() => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   });
@@ -26,16 +24,23 @@ const Map = ({ data = [], unLike, navigation }) => {
       {data.length > 0 ? (
         <ScrollView>
           {data.map((item, index) => {
-            return <ItemLiked data={item} unLike={unLike} />;
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('DetailsProduct', { data: item });
+                }}>
+                <ItemLiked data={item} unLike={unLike} />
+              </TouchableOpacity>
+            );
           })}
         </ScrollView>
       ) : (
-        <View style={{ width: '100%', height: '100%' }}>
-          <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
-            <Image
-              source={require('@src/assets/img/emptyScreen.png')}
-              resizeMode="contain"
-              style={{ width: '100%', height: '100%' }}
+        <View style={styles.viewEmpty}>
+          <View style={styles.chiiderView}>
+            <LottieView
+              source={require('@src/assets/annimated/emptyLove.json')}
+              autoPlay
+              loop
             />
           </View>
         </View>
@@ -75,6 +80,9 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'flex-end',
   },
+  img: { width: '100%', height: '100%' },
+  chiiderView: { width: '100%', height: '100%', alignItems: 'center' },
+  viewEmpty: { width: '100%', height: '100%' },
 });
 
 const mapStateToProps = state => {

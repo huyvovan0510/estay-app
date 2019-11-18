@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import store from '@src/Redux/Store';
 import Confirm from '@src/screens/Login';
 import SplashScreen from 'react-native-splash-screen';
-import Loadingss from '@src/comon/LoadingSc';
+import Loadingss from '@src/screens/Search';
 const App = () => {
   useEffect(() => {
     SplashScreen.hide();

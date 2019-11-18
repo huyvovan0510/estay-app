@@ -44,8 +44,6 @@ export default class App extends Component {
   }
 
   render() {
-    // Because of content inset the scroll value will be negative on iOS so bring
-    // it back to 0.
     const scrollY = Animated.add(
       this.state.scrollY,
       Platform.OS === 'ios' ? HEADER_MAX_HEIGHT : 0,

@@ -56,9 +56,7 @@ const Home = ({ navigation }) => {
       .then(response => response.json())
       .then(responseJson => {
         setHotelsData(responseJson);
-        setTimeout(() => {
-          setLoading(false);
-        }, 4000);
+        setLoading(false);
       })
       .catch(error => {
         console.error(error);
@@ -91,6 +89,7 @@ const Home = ({ navigation }) => {
   const _renderItemCategory = (item, index) => {
     return (
       <TouchableOpacity
+        key={index + ''}
         activeOpacity={0.8}
         style={styles.category}
         onPress={() => {
@@ -131,32 +130,31 @@ const Home = ({ navigation }) => {
     );
   };
   const _renderItemProduct_2 = ({ item, index }) => {
-    return <ItemProduct_2 data={item} />;
+    return (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.shadow}
+        onPress={() => {
+          navigation.push('DetailsProduct', { data: item });
+        }}>
+        <ItemProduct_2 data={item} />
+      </TouchableOpacity>
+    );
   };
+  console.warn('=====', isLoading);
   if (isLoading === true) {
     return <LoadingSC />;
   } else {
     return (
-      // <Header>
       <View style={{ flex: 1 }}>
-        {/* <Text
-          style={{
-            fontSize: 20,
-            fontWeight: '500',
-            alignSelf: 'center',
-            lineHeight: 22,
-            marginVertical: 20,
-            backgroundColor: 'transparent',
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.input}
+          onPress={() => {
+            navigation.push('Search');
           }}>
-          Logo
-        </Text> */}
-        <TouchableOpacity style={styles.searchBar}>
-          <Icons name="search1" size={21} color={'#000'} type="AntDesign" />
-          <TextInput
-            style={styles.input}
-            blurOnSubmit
-            placeholder="Where are you  ?"
-          />
+          <Icon name="search" type="Feather" color="#d8d8d8" />
+          <Text style={{ color: '#d8d8d8' }}>'Nhập nơi bạn muốn đến...'</Text>
         </TouchableOpacity>
         <StatusBar backgroundColor="transparent" barStyle="light-content" />
         <ScrollView
@@ -167,9 +165,6 @@ const Home = ({ navigation }) => {
             <Carousel
               autoplay
               layout={'default'}
-              // ref={c => {
-              //   this._carousel = c;
-              // }}
               loop
               data={data}
               renderItem={_renderSile}
@@ -186,40 +181,41 @@ const Home = ({ navigation }) => {
             <CTitle title="Hot Hotel" color="red" size={16} />
             <View style={{}}>
               <FlatList
+                keyExtractor={({ item, index }) => {
+                  index + '';
+                }}
                 showsHorizontalScrollIndicator={false}
                 horizontal
                 data={hotelsData}
                 renderItem={_renderItemProduct}
-                keyExtractor={item => {
-                  item.id;
-                }}
               />
             </View>
             <CTitle title="Motel" color="red" size={16} />
             <View style={{ alignItems: 'center', flex: 1 }}>
               <FlatList
+                keyExtractor={({ item, index }) => {
+                  index + '';
+                }}
                 showsHorizontalScrollIndicator={false}
                 numColumns={2}
                 data={hotelsData.filter(item => {
                   return item.category === 'Hotel';
                 })}
                 renderItem={_renderItemMotel}
-                keyExtractor={item => {
-                  item.id;
-                }}
               />
             </View>
             <CTitle title="Home Stay" color="red" size={16} />
             <FlatList
+              keyExtractor={({ item, index }) => {
+                index + '';
+              }}
               showsHorizontalScrollIndicator={false}
-              numColumns={2}
               data={hotelsData}
               renderItem={_renderItemProduct_2}
             />
           </View>
         </ScrollView>
       </View>
-      // </Header>
     );
   }
 };

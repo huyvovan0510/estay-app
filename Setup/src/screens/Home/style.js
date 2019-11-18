@@ -95,10 +95,30 @@ const styles = StyleSheet.create({
 
     elevation: 8,
   },
+  // input: {
+  //   width: '100%',
+  //   height: 35,
+  //   padding: 5,
+  // },
   input: {
-    width: '100%',
-    height: 35,
-    padding: 5,
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '90%',
+    borderRadius: 8,
+    height: 50,
+    backgroundColor: '#ffff',
+    marginTop: Platform.OS === 'ios' ? 40 : 10,
+    marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
 export default styles;

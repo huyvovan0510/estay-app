@@ -4,19 +4,13 @@ import Icons from '@src/comon/Icon';
 import styles from './style';
 
 const ItemLiked = ({ data, unLike }) => {
-  const {
-    thumbImg = '',
-    location = '',
-    Price = 0,
-    category = 'Hotel',
-    hotelName = 'Sontana Hotel',
-  } = data;
+  const { category, hotelName, id, imgSrc, price, dec, location } = data;
   return (
     <View style={styles.boxItems}>
       <View style={styles.boxImg}>
         <Image
           source={{
-            uri: thumbImg,
+            uri: imgSrc,
           }}
           resizeMode="cover"
           style={styles.img}
@@ -24,7 +18,7 @@ const ItemLiked = ({ data, unLike }) => {
       </View>
       <View style={styles.contenBox}>
         <Text style={styles.hotelName}>{hotelName}</Text>
-        <Text style={styles.price}>{Price}VND / Day</Text>
+        <Text style={styles.price}>{price}VND / Day</Text>
         <View style={styles.rowCategory}>
           <Icons name="hotel" size={15} color="#000" type="FontAwesome5" />
           <Text style={styles.txtCategory}>{category}</Text>

@@ -21,15 +21,7 @@ const Login = ({ navigation }) => {
         <Text style={{ fontSize: 25, fontWeight: '500', color: '#ff1f75' }}>
           Logo
         </Text>
-        <View
-          style={{
-            backgroundColor: '#ff1f75',
-            width: 50,
-            height: 5,
-            borderRadius: 10,
-            marginTop: 10,
-          }}
-        />
+        <View style={styles.lineLogo} />
       </View>
       <View style={styles.bottomBox}>
         <View style={styles.topTabbar}>
@@ -105,6 +97,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#000',
+  },
+  lineLogo: {
+    backgroundColor: '#ff1f75',
+    width: 50,
+    height: 5,
+    borderRadius: 10,
+    marginTop: 10,
   },
 });
 

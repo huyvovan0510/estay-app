@@ -40,13 +40,7 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
   const item = navigation.state.params;
   const { data } = item;
 
-  const {
-    price = 0,
-    dec = '',
-    imgSrc = '',
-    hotelName = 'Sontana Hotel',
-    location = '',
-  } = data;
+  const { category, hotelName, id, imgSrc, price, dec, location } = data;
   useEffect(() => {
     // data.id === dataLiked.id ? setIsLove(true) : setIsLove(false);
     dataLiked.map(item => {
@@ -101,7 +95,7 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
               </TouchableOpacity>
             </View>
             <LinearGradient
-              colors={['transparent', 'rgba(0,0,0,0.9)']}
+              colors={['transparent', '#000']}
               styles={styles.liner}>
               <Text style={styles.txtLiner} />
             </LinearGradient>
@@ -120,7 +114,7 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
           </View>
           <View style={styles.rowLocation}>
             <Icons name={'hotel'} size={20} color="#ffff" type="FontAwesome5" />
-            <Text style={styles.txtCategory}>Houtel</Text>
+            <Text style={styles.txtCategory}>{category}</Text>
           </View>
           <View style={styles.rowRate}>
             <Icons name="star" size={25} color="#ffff" type="AntDesign" />

@@ -16,8 +16,10 @@ import BookCalendar from '@src/screens/BookCalendar';
 import Confirm from '@src/screens/Confirm';
 import Ticket from '@src/screens/Ticket';
 import History from '@src/screens/history';
+import Search from '@src/screens/Search';
 import HomeStay from '@src/screens/ListProduct/HomeSay';
 import Motel from '@src/screens/ListProduct/Motel';
+
 const BottomTab = createBottomTabNavigator(
   {
     Home: {
@@ -72,6 +74,9 @@ const Stack = createStackNavigator(
     Motel: {
       screen: Motel,
     },
+    Search:{
+      screen:Search
+    }
   },
   {
     headerMode: 'none',

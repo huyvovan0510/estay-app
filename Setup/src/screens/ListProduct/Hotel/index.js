@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
   Platform,
-  UIManager,
 } from 'react-native';
-import Modal from 'react-native-modal';
 import ItemHotel from '@src/components/ItemHotel';
-import { heightScreen } from '@src/comon/Dimensions';
-import Icons from '@src/comon/Icon';
 import Util from '@src/comon/Util';
+import Cheader from '@src/comon/Cheader';
 const { scale } = Util;
-import { data } from '@src/data';
-
+import LottieView from 'lottie-react-native';
 const Motel = ({ navigation }) => {
   const [hotelsData, setHotelsData] = useState([]);
   const [isLoading, setLoading] = useState(false);
@@ -26,9 +21,7 @@ const Motel = ({ navigation }) => {
       .then(response => response.json())
       .then(responseJson => {
         setHotelsData(responseJson);
-        setTimeout(() => {
-          setLoading(false);
-        }, 4000);
+        setLoading(false);
       })
       .catch(error => {
         console.error(error);
@@ -41,42 +34,40 @@ const Motel = ({ navigation }) => {
 
   return (
     <View style={styles.contaimer}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={{ padding: 10 }}
-          activeOpacity={0.7}
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Icons
-            name="md-arrow-back"
-            type="Ionicons"
-            size={30}
-            style={{ paddingTop: Platform.OS === 'android' ? 0 : scale(23) }}
+      <Cheader
+        name={'Hotel'}
+        navigation={navigation}
+        icon={'chevron-thin-left'}
+      />
+      {isLoading ? (
+        <View style={{ flex: 1 }}>
+          <LottieView
+            source={require('@src/assets/annimated/Planhodel.json')}
+            autoPlay
+            loop
           />
-        </TouchableOpacity>
-
-        <Text style={styles.titles}>Hotel</Text>
-      </View>
-      <View style={styles.content}>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={hotelsData.filter(item => {
-            return item.category === 'Hotel';
-          })}
-          numColumns={2}
-          renderItem={({ item, index }) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.push('DetailsProduct', { data: item });
-                }}>
-                <ItemHotel data={item} index={index} />
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
+        </View>
+      ) : (
+        <View style={styles.content}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={hotelsData.filter(item => {
+              return item.category === 'Hotel';
+            })}
+            numColumns={2}
+            renderItem={({ item, index }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.push('DetailsProduct', { data: item });
+                  }}>
+                  <ItemHotel data={item} index={index} />
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </View>
+      )}
     </View>
   );
 };

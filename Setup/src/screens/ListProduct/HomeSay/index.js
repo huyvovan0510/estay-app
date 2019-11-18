@@ -1,58 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
   Platform,
-  UIManager,
+  ScrollView,
 } from 'react-native';
-import Modal from 'react-native-modal';
-import ItemProdcut_1 from '@src/components/ItemMotel';
-import { heightScreen } from '@src/comon/Dimensions';
-import Icons from '@src/comon/Icon';
+import ItemMotel from '@src/components/ItemMotel';
 import Util from '@src/comon/Util';
 const { scale } = Util;
-import { data } from '@src/data';
-
+import Cheader from '@src/comon/Cheader';
+import LottieView from 'lottie-react-native';
 const HomeStay = ({ navigation }) => {
+  const [hotelsData, setHotelsData] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
+  const getdata = () => {
+    setLoading(true);
+    fetch('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotles')
+      .then(response => response.json())
+      .then(responseJson => {
+        setHotelsData(responseJson);
+        setTimeout(() => {
+          setLoading(false);
+        }, 4000);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    getdata();
+  }, []);
+
   return (
     <View style={styles.contaimer}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={{ padding: 10 }}
-          activeOpacity={0.7}
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Icons
-            name="md-arrow-back"
-            type="Ionicons"
-            size={30}
-            style={{ paddingTop: Platform.OS === 'android' ? 0 : scale(23) }}
+      <Cheader
+        name={'HomeStay'}
+        navigation={navigation}
+        icon={'chevron-left'}
+      />
+      {isLoading ? (
+        <View style={{ flex: 1 }}>
+          <LottieView
+            source={require('@src/assets/annimated/Planhodel.json')}
+            autoPlay
+            loop
           />
-        </TouchableOpacity>
-
-        <Text style={styles.titles}>HomeStay</Text>
-      </View>
-      <View style={styles.content}>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={data}
-          numColumns={2}
-          renderItem={({ item, index }) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.push('DetailsProduct', { data: item });
-                }}>
-                <ItemProdcut_1 data={item} index={index} />
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
+        </View>
+      ) : (
+        <ScrollView style={styles.content}>
+          <FlatList
+            style={{ alignSelf: 'center' }}
+            showsVerticalScrollIndicator={false}
+            data={hotelsData.filter(item => {
+              return item.category === 'Motel';
+            })}
+            numColumns={2}
+            renderItem={({ item, index }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.push('DetailsProduct', { data: item });
+                  }}>
+                  <ItemMotel data={item} index={index} />
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </ScrollView>
+      )}
     </View>
   );
 };
@@ -62,8 +81,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
+    paddingVertical: scale(20),
     flex: 1,
-    alignItems: 'center',
   },
   header: {
     marginTop: 20,

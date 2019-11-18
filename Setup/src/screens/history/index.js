@@ -19,6 +19,7 @@ import CHeader from '@src/comon/Cheader';
 import Modal from 'react-native-modal';
 import Util from '@src/comon/Util';
 const { scale } = Util;
+import LottieView from 'lottie-react-native';
 
 const History = ({ navigation, dataTicket }) => {
   const { Price, hotelName, location, startDay, totalPeople } = dataTicket;
@@ -137,11 +138,12 @@ const History = ({ navigation, dataTicket }) => {
             width: '100%',
             height: '100%',
             alignItems: 'center',
+            justifyContent: 'center',
           }}>
-          <Image
-            source={require('@src/assets/img/empstyTicket.png')}
-            resizeMode="contain"
-            style={{ width: '100%', height: '100%' }}
+          <LottieView
+            source={require('@src/assets/annimated/empleticket.json')}
+            autoPlay
+            loop
           />
         </View>
       )}
