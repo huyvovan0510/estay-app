@@ -11,20 +11,21 @@ import Util from '@src/comon/Util';
 import Cheader from '@src/comon/Cheader';
 const { scale } = Util;
 import LottieView from 'lottie-react-native';
-const Motel = ({ navigation }) => {
+import axios from 'axios';
+
+const Hotel = ({ navigation }) => {
   const [hotelsData, setHotelsData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   const getdata = () => {
-    setLoading(true);
-    fetch('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotles')
-      .then(response => response.json())
-      .then(responseJson => {
-        setHotelsData(responseJson);
+    axios
+      .get('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
+      .then(function(response) {
+        response ? setHotelsData(response.data) : setHotelsData([]);
         setLoading(false);
       })
-      .catch(error => {
-        console.error(error);
+      .catch(function(error) {
+        console.log(error);
       });
   };
 
@@ -100,4 +101,4 @@ const styles = StyleSheet.create({
   titles: { color: '#000', fontSize: 20, fontWeight: '500', marginLeft: 15 },
 });
 
-export default Motel;
+export default Hotel;

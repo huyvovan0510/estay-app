@@ -12,22 +12,21 @@ import Util from '@src/comon/Util';
 const { scale } = Util;
 import Cheader from '@src/comon/Cheader';
 import LottieView from 'lottie-react-native';
+import axios from 'axios';
+
 const HomeStay = ({ navigation }) => {
   const [hotelsData, setHotelsData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   const getdata = () => {
-    setLoading(true);
-    fetch('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotles')
-      .then(response => response.json())
-      .then(responseJson => {
-        setHotelsData(responseJson);
-        setTimeout(() => {
-          setLoading(false);
-        }, 4000);
+    axios
+      .get('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
+      .then(function(response) {
+        response ? setHotelsData(response.data) : setHotelsData([]);
+        setLoading(false);
       })
-      .catch(error => {
-        console.error(error);
+      .catch(function(error) {
+        console.log(error);
       });
   };
 

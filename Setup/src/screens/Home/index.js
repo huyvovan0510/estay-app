@@ -23,6 +23,8 @@ import styles from './style';
 import { data } from '../../data';
 import Util from '@src/comon/Util';
 import LoadingSC from '@src/comon/LoadingSc';
+import axios from 'axios';
+
 const { scale } = Util;
 
 const category = [
@@ -48,18 +50,17 @@ const category = [
 
 const Home = ({ navigation }) => {
   const [hotelsData, setHotelsData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const getdata = () => {
-    setLoading(true);
-    fetch('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotles')
-      .then(response => response.json())
-      .then(responseJson => {
-        setHotelsData(responseJson);
+    axios
+      .get('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
+      .then(function(response) {
+        response ? setHotelsData(response.data) : setHotelsData([]);
         setLoading(false);
       })
-      .catch(error => {
-        console.error(error);
+      .catch(function(error) {
+        console.log(error);
       });
   };
 
@@ -70,6 +71,7 @@ const Home = ({ navigation }) => {
   const _renderSile = ({ item, index }) => {
     return (
       <TouchableOpacity
+        key={item.id}
         activeOpacity={0.8}
         onPress={() => {
           //navigate to Details product scerren  and pass data
@@ -89,7 +91,7 @@ const Home = ({ navigation }) => {
   const _renderItemCategory = (item, index) => {
     return (
       <TouchableOpacity
-        key={index + ''}
+        key={item.id}
         activeOpacity={0.8}
         style={styles.category}
         onPress={() => {
@@ -106,6 +108,7 @@ const Home = ({ navigation }) => {
   const _renderItemProduct = ({ item, index }) => {
     return (
       <TouchableOpacity
+        key={item.id}
         activeOpacity={0.8}
         style={styles.shadow}
         onPress={() => {
@@ -120,6 +123,7 @@ const Home = ({ navigation }) => {
   const _renderItemMotel = ({ item, index }) => {
     return (
       <TouchableOpacity
+        key={item.id}
         activeOpacity={0.8}
         style={styles.shadow}
         onPress={() => {
@@ -132,6 +136,7 @@ const Home = ({ navigation }) => {
   const _renderItemProduct_2 = ({ item, index }) => {
     return (
       <TouchableOpacity
+        key={item.id}
         activeOpacity={0.8}
         style={styles.shadow}
         onPress={() => {
@@ -141,7 +146,7 @@ const Home = ({ navigation }) => {
       </TouchableOpacity>
     );
   };
-  console.warn('=====', isLoading);
+
   if (isLoading === true) {
     return <LoadingSC />;
   } else {
@@ -181,9 +186,7 @@ const Home = ({ navigation }) => {
             <CTitle title="Hot Hotel" color="red" size={16} />
             <View style={{}}>
               <FlatList
-                keyExtractor={({ item, index }) => {
-                  index + '';
-                }}
+                keyExtractor={item => item.id}
                 showsHorizontalScrollIndicator={false}
                 horizontal
                 data={hotelsData}
@@ -193,9 +196,7 @@ const Home = ({ navigation }) => {
             <CTitle title="Motel" color="red" size={16} />
             <View style={{ alignItems: 'center', flex: 1 }}>
               <FlatList
-                keyExtractor={({ item, index }) => {
-                  index + '';
-                }}
+                keyExtractor={item => item.id}
                 showsHorizontalScrollIndicator={false}
                 numColumns={2}
                 data={hotelsData.filter(item => {
@@ -206,9 +207,7 @@ const Home = ({ navigation }) => {
             </View>
             <CTitle title="Home Stay" color="red" size={16} />
             <FlatList
-              keyExtractor={({ item, index }) => {
-                index + '';
-              }}
+              keyExtractor={item => item.id}
               showsHorizontalScrollIndicator={false}
               data={hotelsData}
               renderItem={_renderItemProduct_2}

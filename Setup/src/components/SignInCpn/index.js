@@ -8,31 +8,63 @@ import {
   TextInput,
   Platform,
 } from 'react-native';
-import Icons from '@src/comon/Icon';
+import axios from 'axios';
+
 const SignInCpn = ({ navigation }) => {
+  let email = '';
+  let passWord = '';
+  let phoneNumber = '';
+  const onSumit = (email, passWord, phoneNumber) => {
+    axios
+      .post('https://serverappfood.herokuapp.com/api/user/sendmail', {
+        email: email,
+        pass: passWord,
+      })
+      .then(function(response) {
+        console.log(response);
+        //// bật dailog
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingHorizontal: 50,
-        justifyContent: 'center',
-        backgroundColor: '#ffff',
-      }}>
-      <TextInput placeholder={'Usename ...'} style={styles.input} />
-      <TextInput placeholder={'Email ...'} style={styles.input} />
+    <View style={styles.container}>
+      <TextInput
+        placeholder={'Email ...'}
+        style={styles.input}
+        onChangeText={text => {
+          email = text;
+        }}
+      />
 
       <TextInput
         placeholder={'PassWord ...'}
         style={styles.input}
         secureTextEntry
+        onChangeText={text => {
+          passWord = text;
+        }}
       />
       <TextInput
         placeholder={'PassWord ...'}
         style={styles.input}
         secureTextEntry
       />
+      <TextInput
+        placeholder={'Phone Number ...'}
+        style={styles.input}
+        keyboardType="numeric"
+        onChangeText={text => {
+          phoneNumber = text;
+        }}
+      />
 
-      <TouchableOpacity style={styles.btnLogin}>
+      <TouchableOpacity
+        style={styles.btnLogin}
+        onPress={() => {
+          console.log(email, passWord, phoneNumber);
+        }}>
         <Text style={styles.txtLogin}>Dăng Ki</Text>
       </TouchableOpacity>
     </View>
@@ -40,6 +72,12 @@ const SignInCpn = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 50,
+    justifyContent: 'center',
+    backgroundColor: '#ffff',
+  },
   topBox: {
     flex: 1,
   },

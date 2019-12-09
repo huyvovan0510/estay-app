@@ -25,6 +25,8 @@ project.xcworkspace
 # Android/IntelliJ
 #
 build/
+package.json
+yarn.lock
 .idea
 .gradle
 local.properties
