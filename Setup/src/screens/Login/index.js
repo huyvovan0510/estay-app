@@ -16,7 +16,7 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 const Login = ({ navigation }) => {
   const [indexTab, setIndextab] = useState(1);
   return (
-    <View style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
+    <View style={{ flex: 1, backgroundColor: '#ffff' }}>
       <View style={styles.topBox}>
         <Text style={{ fontSize: 25, fontWeight: '500', color: '#ff1f75' }}>
           Logo
@@ -26,10 +26,8 @@ const Login = ({ navigation }) => {
       <View style={styles.bottomBox}>
         <View style={styles.topTabbar}>
           <TouchableOpacity
-            style={[
-              styles.tabItem,
-              { backgroundColor: indexTab === 1 ? '#ffff' : '#f2f2f2' },
-            ]}
+            activeOpacity={1}
+            style={[styles.tabItem, { backgroundColor: '#fff' }]}
             onPress={() => {
               LayoutAnimation.configureNext(
                 LayoutAnimation.Presets.easeInEaseOut,
@@ -42,12 +40,8 @@ const Login = ({ navigation }) => {
             <View style={indexTab === 1 ? styles.tabBarSelect : {}} />
           </TouchableOpacity>
           <TouchableOpacity
-            style={[
-              styles.tabItem,
-              {
-                backgroundColor: indexTab === 2 ? '#ffff' : '#f2f2f2',
-              },
-            ]}
+            activeOpacity={1}
+            style={[styles.tabItem]}
             onPress={() => {
               LayoutAnimation.configureNext(
                 LayoutAnimation.Presets.easeInEaseOut,
@@ -81,8 +75,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+
+    backgroundColor: '#ffff',
   },
   tabBarSelect: {
     marginTop: 5,

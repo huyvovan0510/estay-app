@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,18 +13,39 @@ import Icons from '@src/comon/Icon';
 import StarRating from 'react-native-star-rating';
 import { widthScreen, heightScreen } from '@src/comon/Dimensions';
 import ItemComents from '@src/components/ItemComment';
-let content = '';
-const ContentDailog = ({ data, unLike }) => {
+import axios from 'axios';
+
+const ContentDailog = ({ data, unLike, hotelId = '0' }) => {
   const [Comments, setComments] = useState([]);
-  const [isComment, setIComments] = useState(true);
   const [countStart, setCountStart] = useState(0);
+  let content = '';
+
   const ratingCompleted = rating => {
     setCountStart(rating);
   };
-  const handelSubmit = () => {
-    let newComments = { id: Math.random() + '', content: content };
-    let tempComments = Comments.concat(newComments);
-    setComments(tempComments);
+  useEffect(() => {});
+  const handelSubmit = content => {
+    axios
+      .post('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Comments', {
+        use: 'Huy vo van',
+        idHotel: hotelId,
+        content: content,
+        countStart: countStart,
+        avatar: '',
+        date: Date(),
+      })
+      .then(function(response) {
+        console.log(response);
+        let tempComments = Comments.concat(response.data);
+        setComments(tempComments);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    // let newComments = { id: Masth.random() + '', content: content };
+    // let tempComments = Comment.concat(newComments);
+    // setComments(tempComments);
   };
   const getValue = text => {
     content = text;
@@ -36,32 +57,28 @@ const ContentDailog = ({ data, unLike }) => {
         <Text style={styles.titleRating}>Đánh giá</Text>
       </View>
       <View style={styles.ratingBox}>
-        {isComment ? (
-          <StarRating
-            containerStyle={{ width: widthScreen / 2 }}
-            starSize={35}
-            animation="swing"
-            emptyStarColor={'#c9c9c9'}
-            starStyle={{
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
+        <StarRating
+          containerStyle={{ width: widthScreen / 2 }}
+          starSize={35}
+          animation="swing"
+          emptyStarColor={'#c9c9c9'}
+          starStyle={{
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
 
-              elevation: 5,
-            }}
-            fullStarColor={'#ffe819'}
-            disabled={false}
-            maxStars={5}
-            rating={countStart}
-            selectedStar={rating => ratingCompleted(rating)}
-          />
-        ) : (
-          <View />
-        )}
+            elevation: 5,
+          }}
+          fullStarColor={'#ffe819'}
+          disabled={false}
+          maxStars={5}
+          rating={countStart}
+          selectedStar={rating => ratingCompleted(rating)}
+        />
       </View>
       <View style={styles.boxComment}>
         <FlatList
@@ -72,37 +89,31 @@ const ContentDailog = ({ data, unLike }) => {
           }}
         />
       </View>
-      {isComment ? (
-        <View style={styles.inputComment}>
-          <TextInput
-            style={styles.input}
-            placeholder="Your comment...."
-            multiline={true}
-            numberOfLines={4}
-            scrollEnabled={true}
-            onChangeText={text => getValue(text)}
+      <View style={styles.inputComment}>
+        <TextInput
+          style={styles.input}
+          placeholder="Your comment...."
+          numberOfLines={4}
+          scrollEnabled={true}
+          onChangeText={text => {
+            content = text;
+          }}
+        />
+        <TouchableOpacity
+          style={styles.btnSen}
+          onPress={() => {
+            handelSubmit(content);
+            // setIComments(false);
+          }}>
+          <Icons
+            name="send-o"
+            type="FontAwesome"
+            size={30}
+            color="#dbdbdb"
+            munti
           />
-          <TouchableOpacity
-            style={styles.btnSen}
-            onPress={() => {
-              handelSubmit();
-              setIComments(false);
-            }}>
-            <Icons
-              name="send-o"
-              type="FontAwesome"
-              size={30}
-              color="#dbdbdb"
-              munti
-            />
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <View style={styles.finishCmt}>
-          <Icons name="check" size={30} color="#22ff00" />
-          <Text>Cảm ơn bạn đã đánh giá chúng tôi !</Text>
-        </View>
-      )}
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

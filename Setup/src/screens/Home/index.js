@@ -49,6 +49,7 @@ const category = [
 ];
 
 const Home = ({ navigation }) => {
+  console.log('Homerender');
   const [hotelsData, setHotelsData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -167,6 +168,7 @@ const Home = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           style={{ backgroundColor: '#ffff' }}>
           <View style={styles.boxCarưosel}>
+            {console.log('=====')}
             <Carousel
               autoplay
               layout={'default'}

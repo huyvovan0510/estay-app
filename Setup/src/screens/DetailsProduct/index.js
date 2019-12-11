@@ -17,19 +17,8 @@ import styles from './style';
 import { connect } from 'react-redux';
 import RoomOptions from '@src/components/RoomOption';
 import Modal from 'react-native-modal';
-
 import ContentDailog from '@src/components/ContenDailog';
 import Util from '@src/comon/Util';
-
-const Rooms = [
-  { id: '1', room: '102' },
-  { id: '2', room: '105' },
-  { id: '3', room: '107' },
-  { id: '4', room: '122' },
-  { id: '5', room: '142' },
-  { id: '6', room: '123' },
-  { id: '7', room: '122' },
-];
 if (
   Platform.OS === 'android' &&
   UIManager.setLayoutAnimationEnabledExperimental
@@ -40,18 +29,31 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
   const item = navigation.state.params;
   const { data } = item;
 
-  const { category, hotelName, id, imgSrc, price, dec, location } = data;
+  const {
+    category,
+    hotelName,
+    id,
+    imgSrc,
+    price,
+    dec,
+    location,
+    rooms,
+    service,
+  } = data;
+
   useEffect(() => {
     // data.id === dataLiked.id ? setIsLove(true) : setIsLove(false);
     dataLiked.map(item => {
       item.id === data.id ? setIsLove(true) : null;
     });
   }, [data.id, dataLiked, dataLiked.id]);
-
+  const [roomInfor, setInfor] = useState({});
   const [isDask, setIsDask] = useState(false);
   const [isLove, setIsLove] = useState(false);
   const [showRiview, setShowRivew] = useState(false);
-
+  const getInforRooms = roomInfor => {
+    setInfor(roomInfor);
+  };
   return (
     <View style={{ flex: 1 }}>
       <StatusBar backgroundColor="#000" />
@@ -121,9 +123,11 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
             <Text style={styles.numRate}>5.0</Text>
           </View>
           <View style={{ borderBottomWidth: 0.5, borderColor: '#a8a8a8' }}>
-            <RoomOptions Room={Rooms} roomCategory="Standard" />
-            <RoomOptions Room={Rooms} roomCategory="Superior" />
-            <RoomOptions Room={Rooms} roomCategory="Deluxe" />
+            <RoomOptions
+              Room={rooms}
+              roomCategory="Standard"
+              getInforRooms={getInforRooms}
+            />
           </View>
 
           <View style={styles.BoxUnname}>
@@ -136,7 +140,7 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
                   color={'#fff'}
                 />
                 <Text style={styles.roomStatus}>Room Status</Text>
-                <Text style={styles.status}>ready !</Text>
+                <Text style={styles.status}> {roomInfor.status}</Text>
               </View>
               <View
                 style={{
@@ -161,42 +165,25 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
           <Text style={styles.service}>Extra service</Text>
           <View style={{ marginBottom: 30 }}>
             <FlatList
-              data={Rooms}
+              data={service}
               horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={({ item, index }) => {
                 return (
                   <View style={styles.boxServer}>
                     <Icons
-                      name="food-fork-drink"
+                      name={item.icon}
                       size={30}
                       color="#000"
-                      type="MaterialCommunityIcons"
+                      type={item.type}
                     />
-                    <Text style={styles.txtService}> Food server</Text>
+                    <Text style={styles.txtService}>{item.service}</Text>
                   </View>
                 );
               }}
             />
           </View>
           <Text style={styles.review}>Reviews</Text>
-          <View style={styles.boxReviews}>
-            <View style={styles.title}>
-              <View style={styles.avata} />
-              <View>
-                <Text style={styles.useName}>Huy vo van</Text>
-                <Text style={styles.date}> 2-09-2019</Text>
-              </View>
-            </View>
-            <View />
-            <View style={styles.contentRiviews}>
-              <Text style={styles.txtContentReviews} numberOfLines={4}>
-                Once you have your idea or theme, start drawing out the elements
-                onto a piece of paper. Ideally, you should draw boxes to
-                represent each story element. Storyboard your Facebook story
-              </Text>
-            </View>
-          </View>
           <TouchableOpacity
             style={styles.btnReadAll}
             onPress={() => {

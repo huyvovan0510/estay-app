@@ -13,12 +13,13 @@ import Icons from '@src/comon/Icon';
 import Util from '@src/comon/Util';
 const { scale } = Util;
 
-const Ctitle = ({ Room = [], roomCategory = '' }) => {
+const Ctitle = ({ Room = [], roomCategory = '', getInforRooms }) => {
   const [id, setId] = useState('');
   const getID = id => {
     console.log(id);
     setId(id);
   };
+
   return (
     <View style={styles.boxRooms}>
       <Text style={styles.txtRooms}>{roomCategory}</Text>
@@ -30,6 +31,7 @@ const Ctitle = ({ Room = [], roomCategory = '' }) => {
             <TouchableOpacity
               onPress={() => {
                 getID(item.id);
+                getInforRooms(item);
               }}>
               <View
                 style={[
@@ -42,7 +44,7 @@ const Ctitle = ({ Room = [], roomCategory = '' }) => {
                   style={{
                     color: id === item.id ? '#ffffffff' : '#a8a8a8',
                   }}>
-                  {item.room}
+                  {item.number}
                 </Text>
               </View>
             </TouchableOpacity>
