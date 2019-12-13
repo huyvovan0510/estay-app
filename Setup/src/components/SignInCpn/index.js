@@ -88,7 +88,7 @@ const SignInCpn = ({ navigation }) => {
         onPress={() => {
           onSumit(email, passWord, phoneNumber, username);
         }}>
-        <Text style={styles.txtLogin}>Dăng Ki</Text>
+        <Text style={styles.txtLogin}> Registration</Text>
       </TouchableOpacity>
     </View>
   );

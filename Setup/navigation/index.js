@@ -74,9 +74,9 @@ const Stack = createStackNavigator(
     Motel: {
       screen: Motel,
     },
-    Search:{
-      screen:Search
-    }
+    Search: {
+      screen: Search,
+    },
   },
   {
     headerMode: 'none',

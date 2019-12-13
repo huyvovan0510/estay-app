@@ -5,7 +5,7 @@ import { heightScreen } from '@src/comon/Dimensions';
 
 const ItemHotel = ({ data = {}, index = 0 }) => {
   const { category, hotelName, id, imgSrc, price, dec, location } = data;
-  console.log('search', data);
+
   return (
     <View
       style={[

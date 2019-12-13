@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   UIManager,
   LayoutAnimation,
+  Image,
 } from 'react-native';
 import Icons from '@src/comon/Icon';
 import LoginCpn from '@src/components/LoginCpn';
@@ -18,10 +19,10 @@ const Login = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: '#ffff' }}>
       <View style={styles.topBox}>
-        <Text style={{ fontSize: 25, fontWeight: '500', color: '#ff1f75' }}>
-          Logo
-        </Text>
-        <View style={styles.lineLogo} />
+        <Image
+          source={require('@src/assets/img/logo.png')}
+          style={{ width: 113, height: 56 }}
+        />
       </View>
       <View style={styles.bottomBox}>
         <View style={styles.topTabbar}>
@@ -35,7 +36,7 @@ const Login = ({ navigation }) => {
               setIndextab(1);
             }}>
             <Text style={{ color: indexTab === 1 ? '#ff1f75' : '#c8c8c8' }}>
-              Đăng Nhập
+              Log in
             </Text>
             <View style={indexTab === 1 ? styles.tabBarSelect : {}} />
           </TouchableOpacity>
@@ -49,7 +50,7 @@ const Login = ({ navigation }) => {
               setIndextab(2);
             }}>
             <Text style={{ color: indexTab === 2 ? '#ff1f75' : '#c8c8c8' }}>
-              Đăng Kí
+              Registration
             </Text>
             <View style={indexTab === 2 ? styles.tabBarSelect : null} />
           </TouchableOpacity>

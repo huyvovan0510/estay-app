@@ -13,6 +13,9 @@ import Confirm from '@src/screens/Login';
 import SplashScreen from 'react-native-splash-screen';
 import Loadingss from '@src/screens/Search';
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  });
   return (
     <Provider store={store}>
       <AppNavigation />

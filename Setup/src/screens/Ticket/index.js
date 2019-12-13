@@ -16,7 +16,14 @@ import { connect } from 'react-redux';
 const { scale } = Util;
 const Ticket = ({ navigation, BuyTicket }) => {
   let ticketData = navigation.state.params;
-  const { Price, hotelName, location, startDay, totalPeople } = ticketData;
+  const {
+    Price,
+    hotelName,
+    location,
+    startDay,
+    totalPeople,
+    room,
+  } = ticketData;
 
   return (
     <View style={styles.contatiner}>
@@ -51,26 +58,21 @@ const Ticket = ({ navigation, BuyTicket }) => {
 
           <View style={styles.row}>
             <View>
-              <Text style={styles.category}>Hote</Text>
+              <Text style={styles.category}>Name</Text>
               <Text style={styles.value}>Võ Văn Huy</Text>
             </View>
 
             <View>
-              <Text style={styles.category}>Số lượng</Text>
-              <Text style={styles.value}>{totalPeople + ' Người'}</Text>
+              <Text style={styles.category}>People</Text>
+              <Text style={styles.value}>{3 + ' People'}</Text>
             </View>
           </View>
-          <View style={styles.row}>
-            <View>
-              <Text style={styles.category}>Số Phòng</Text>
-              <Text style={styles.value}>PS07106</Text>
-            </View>
 
-            <View>
-              <Text style={styles.category}>Loại Phòng</Text>
-              <Text style={styles.value}>VIP</Text>
-            </View>
+          <View style={{ alignItems: 'center', marginVertical: 15 }}>
+            <Text style={styles.category}>Room</Text>
+            <Text style={styles.value}>{room}</Text>
           </View>
+
           <Text style={styles.txtTotal}>{'Tổng: ' + Price + 'VND'}</Text>
         </View>
 
@@ -86,7 +88,7 @@ const Ticket = ({ navigation, BuyTicket }) => {
             BuyTicket(ticketData);
             navigation.navigate('Home');
           }}>
-          <Text style={styles.txtdone}>Xong</Text>
+          <Text style={styles.txtdone}>Done</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   done: {
-    width: '100%',
+    width: '85%',
     height: scale(50),
     backgroundColor: '#ff1f75',
     alignSelf: 'center',

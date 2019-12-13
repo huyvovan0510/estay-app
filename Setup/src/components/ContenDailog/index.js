@@ -14,28 +14,38 @@ import StarRating from 'react-native-star-rating';
 import { widthScreen, heightScreen } from '@src/comon/Dimensions';
 import ItemComents from '@src/components/ItemComment';
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
-const ContentDailog = ({ data, unLike, hotelId = '0' }) => {
+const ContentDailog = ({ data, unLike, hotelid }) => {
   const [Comments, setComments] = useState([]);
   const [countStart, setCountStart] = useState(0);
   let content = '';
-
+  console.log('remder');
   const ratingCompleted = rating => {
     setCountStart(rating);
   };
-  useEffect(() => {});
+
+  useEffect(() => {
+    axios
+      .get('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Comments')
+      .then(function(response) {
+        setComments(response.data);
+      })
+      .catch(function(error) {
+        alert(JSON.stringify(error));
+      });
+  }, []);
   const handelSubmit = content => {
     axios
       .post('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Comments', {
         use: 'Huy vo van',
-        idHotel: hotelId,
+        idHotel: hotelid,
         content: content,
         countStart: countStart,
         avatar: '',
         date: Date(),
       })
       .then(function(response) {
-        console.log(response);
         let tempComments = Comments.concat(response.data);
         setComments(tempComments);
       })
@@ -47,10 +57,8 @@ const ContentDailog = ({ data, unLike, hotelId = '0' }) => {
     // let tempComments = Comment.concat(newComments);
     // setComments(tempComments);
   };
-  const getValue = text => {
-    content = text;
-    return content;
-  };
+  console.log('>>>>>', Comments);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -83,7 +91,12 @@ const ContentDailog = ({ data, unLike, hotelId = '0' }) => {
       <View style={styles.boxComment}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={Comments}
+          data={Comments.filter(item => {
+            console.log('====', item.idHotel);
+            console.log('====', hotelid);
+
+            return item.idHotel === hotelid;
+          })}
           renderItem={({ item, index }) => {
             return <ItemComents data={item} countStart={countStart} />;
           }}

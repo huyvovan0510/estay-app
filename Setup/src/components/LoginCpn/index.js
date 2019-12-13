@@ -12,6 +12,7 @@ import Modal from 'react-native-modal';
 import Icons from '@src/comon/Icon';
 import axios from 'axios';
 import LottieView from 'lottie-react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 const LoginCpn = ({ navigation }) => {
   const [showError, setShowError] = useState(false);
   let email = '';
@@ -23,14 +24,23 @@ const LoginCpn = ({ navigation }) => {
         password: passWord,
       })
       .then(function(response) {
+        console.log(response.data);
         response.status === 200
           ? navigation.navigate('Home')
           : setShowError(true);
-        //// bật dailog
+        // bật dailog
+        saveInForUser(response.data);
       })
       .catch(function(error) {
         console.log(error);
       });
+  };
+  const saveInForUser = async data => {
+    try {
+      await AsyncStorage.setItem('inforUser', JSON.stringify(data));
+    } catch (e) {
+      // saving error
+    }
   };
 
   const closeDailog = () => {
@@ -58,7 +68,7 @@ const LoginCpn = ({ navigation }) => {
         onPress={() => {
           onLogin(email, passWord);
         }}>
-        <Text style={styles.txtLogin}>Dăng nhập</Text>
+        <Text style={styles.txtLogin}>Log in</Text>
       </TouchableOpacity>
       <Modal isVisible={showError} avoidKeyboard={true}>
         <DailogError closeDailog={closeDailog} />

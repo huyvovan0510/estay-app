@@ -38,6 +38,7 @@ const Confirm = ({ navigation }) => {
     location = '',
     startDay = {},
     day = 0,
+    room = '',
   } = item;
 
   return (
@@ -68,13 +69,13 @@ const Confirm = ({ navigation }) => {
       <View style={styles.container}>
         <ItemsConfirm
           navigation={navigation}
-          Category={'Ngày Checkin'}
+          Category={'Checkin'}
           dataConfirm={moment(startDay.startDate).format('MMMM Do YYYY')}
         />
         <ItemsConfirm
           showDaiglog={showDaiglog}
-          Category={'Số Người'}
-          dataConfirm={totalPeople + ' Người'}
+          Category={'Maximum number of people'}
+          dataConfirm={'3 Pepple'}
         />
         <Modal
           isVisible={showRiview}
@@ -87,12 +88,12 @@ const Confirm = ({ navigation }) => {
           </View>
         </Modal>
         <ItemsConfirm
-          Category={'Phòng'}
-          dataConfirm={113}
+          Category={'Room'}
+          dataConfirm={room}
           navigation={navigation}
         />
         <ItemsConfirm
-          Category={'Tổng Giá tiền'}
+          Category={'Total price'}
           dataConfirm={Price + ' VND'}
           navigation={navigation}
         />
@@ -107,6 +108,7 @@ const Confirm = ({ navigation }) => {
             location,
             startDay,
             totalPeople,
+            room: room,
           });
         }}>
         <Text style={styles.txtDone}>Done</Text>

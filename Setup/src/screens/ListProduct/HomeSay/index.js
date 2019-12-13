@@ -13,17 +13,20 @@ const { scale } = Util;
 import Cheader from '@src/comon/Cheader';
 import LottieView from 'lottie-react-native';
 import axios from 'axios';
+import LoadingSC from '@src/comon/LoadingSc';
 
 const HomeStay = ({ navigation }) => {
   const [hotelsData, setHotelsData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const getdata = () => {
     axios
-      .get('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
+      .get('https://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
       .then(function(response) {
         response ? setHotelsData(response.data) : setHotelsData([]);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000);
       })
       .catch(function(error) {
         console.log(error);
@@ -42,20 +45,14 @@ const HomeStay = ({ navigation }) => {
         icon={'chevron-left'}
       />
       {isLoading ? (
-        <View style={{ flex: 1 }}>
-          <LottieView
-            source={require('@src/assets/annimated/Planhodel.json')}
-            autoPlay
-            loop
-          />
-        </View>
+        <LoadingSC />
       ) : (
         <ScrollView style={styles.content}>
           <FlatList
             style={{ alignSelf: 'center' }}
             showsVerticalScrollIndicator={false}
             data={hotelsData.filter(item => {
-              return item.category === 'Motel';
+              return item.category === 'HomeStay';
             })}
             numColumns={2}
             renderItem={({ item, index }) => {

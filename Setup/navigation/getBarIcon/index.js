@@ -66,8 +66,8 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
       break;
     case 'Setting':
       // iconName = focused ? 'apple' : 'apple-pay';
-      iconName = 'setting';
-      typeIcon = 'AntDesign';
+      iconName = 'user';
+      typeIcon = 'Feather';
       badgeCount = 0;
       // IconComponent = IconWithBadge;
       break;
@@ -80,8 +80,8 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
       break;
     default:
       // iconName = focused ? 'gitkraken' : 'github';
-      iconName = 'setting';
-      typeIcon = 'AntDesign';
+      iconName = 'user';
+      typeIcon = 'Feather';
       IconComponent = null;
       break;
   }

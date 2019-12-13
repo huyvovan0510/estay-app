@@ -19,6 +19,8 @@ import RoomOptions from '@src/components/RoomOption';
 import Modal from 'react-native-modal';
 import ContentDailog from '@src/components/ContenDailog';
 import Util from '@src/comon/Util';
+import AsyncStorage from '@react-native-community/async-storage';
+
 if (
   Platform.OS === 'android' &&
   UIManager.setLayoutAnimationEnabledExperimental
@@ -28,7 +30,6 @@ if (
 const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
   const item = navigation.state.params;
   const { data } = item;
-
   const {
     category,
     hotelName,
@@ -47,6 +48,8 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
       item.id === data.id ? setIsLove(true) : null;
     });
   }, [data.id, dataLiked, dataLiked.id]);
+  const [isLogin, setIsLogin] = useState({});
+  const [showWarning, setShow] = useState(false);
   const [roomInfor, setInfor] = useState({});
   const [isDask, setIsDask] = useState(false);
   const [isLove, setIsLove] = useState(false);
@@ -54,9 +57,56 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
   const getInforRooms = roomInfor => {
     setInfor(roomInfor);
   };
+  useState(() => {
+    AsyncStorage.getItem('inforUser', (_err, result) => {
+      setIsLogin(result);
+    });
+  });
+
+  const hadelBook = () => {
+    isLogin === 'null'
+      ? navigation.navigate('Setting')
+      : navigation.navigate('BookCalendar', {
+          Price: price,
+          dec: dec,
+          thumbImg: imgSrc,
+          imgSrc: imgSrc,
+          hotelName: hotelName,
+          location: location,
+          room: roomInfor.number,
+        });
+  };
   return (
     <View style={{ flex: 1 }}>
       <StatusBar backgroundColor="#000" />
+      <View style={styles.headerDetails}>
+        <TouchableOpacity
+          style={styles.btnGoBack}
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Icons
+            name="arrow-back"
+            size={25}
+            type={'MaterialIcons'}
+            color="#000"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.btnGoBack}
+          onPress={() => {
+            LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+            setIsLove(!isLove);
+            !isLove ? isLike(data) : unLike(data);
+          }}>
+          <Icons
+            name={isLove ? 'heart' : 'hearto'}
+            size={25}
+            type={'AntDesign'}
+            color={isLove ? 'red' : '#000'}
+          />
+        </TouchableOpacity>
+      </View>
       <ScrollView
         onScroll={event => {
           event.nativeEvent.contentOffset.y > 197
@@ -68,34 +118,6 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
             source={{ uri: imgSrc }}
             resizeMode="cover"
             style={styles.img}>
-            <View style={styles.headerDetails}>
-              <TouchableOpacity
-                style={styles.btnGoBack}
-                onPress={() => {
-                  navigation.goBack();
-                }}>
-                <Icons
-                  name="arrow-back"
-                  size={25}
-                  type={'MaterialIcons'}
-                  color="#000"
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.btnGoBack}
-                onPress={() => {
-                  LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-                  setIsLove(!isLove);
-                  !isLove ? isLike(data) : unLike(data);
-                }}>
-                <Icons
-                  name={isLove ? 'heart' : 'hearto'}
-                  size={25}
-                  type={'AntDesign'}
-                  color={isLove ? 'red' : '#000'}
-                />
-              </TouchableOpacity>
-            </View>
             <LinearGradient
               colors={['transparent', '#000']}
               styles={styles.liner}>
@@ -187,7 +209,9 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
           <TouchableOpacity
             style={styles.btnReadAll}
             onPress={() => {
-              setShowRivew(true);
+              isLogin === 'null'
+                ? alert('You need to be logged in to be able to comment !')
+                : setShowRivew(true);
             }}>
             <Text style={styles.readAll}>Read all review</Text>
             <Modal
@@ -196,8 +220,11 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
               onBackdropPress={() => {
                 setShowRivew(false);
               }}>
+              <View style={{ backgroundColor: 'red' }} />
+
               <View style={styles.dailog}>
-                <ContentDailog />
+                {console.log('ssssss')}
+                <ContentDailog hotelid={id} />
               </View>
             </Modal>
           </TouchableOpacity>
@@ -233,20 +260,17 @@ const DetailsProduct = ({ navigation, isLike, unLike, dataLiked = [] }) => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('BookCalendar', {
-              Price: price,
-              dec: dec,
-              thumbImg: imgSrc,
-              imgSrc: imgSrc,
-              hotelName: hotelName,
-              location: location,
-            });
+            roomInfor.number ? hadelBook() : null;
           }}
           style={[
             styles.btnBook,
-            {
-              backgroundColor: isDask ? '#e03a61' : '#fff',
-            },
+            roomInfor.number
+              ? {
+                  backgroundColor: isDask ? '#e03a61' : '#fff',
+                }
+              : {
+                  backgroundColor: isDask ? '#e48fa3' : '#e6e6e6',
+                },
           ]}>
           <Text
             style={[styles.txtbookNow, { color: isDask ? '#fff' : '#000' }]}>

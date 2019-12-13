@@ -22,8 +22,14 @@ const { scale } = Util;
 import LottieView from 'lottie-react-native';
 
 const History = ({ navigation, dataTicket }) => {
-  const { Price, hotelName, location, startDay, totalPeople } = dataTicket;
-  console.log('dât', dataTicket);
+  const {
+    Price,
+    hotelName,
+    location,
+    startDay,
+    totalPeople,
+    room,
+  } = dataTicket;
 
   const [showDailog, setShowDailog] = useState(false);
   return (
@@ -84,26 +90,20 @@ const History = ({ navigation, dataTicket }) => {
 
                       <View style={styles.row}>
                         <View>
-                          <Text style={styles.category}>Hote</Text>
+                          <Text style={styles.category}>Name</Text>
                           <Text style={styles.value}>Võ Văn Huy</Text>
                         </View>
 
                         <View>
-                          <Text style={styles.category}>Số lượng</Text>
-                          <Text style={styles.value}>
-                            {item.totalPeople + ' Người'}
-                          </Text>
+                          <Text style={styles.category}>People</Text>
+                          <Text style={styles.value}>{3 + ' Người'}</Text>
                         </View>
                       </View>
-                      <View style={styles.row}>
+                      <View
+                        style={{ alignItems: 'center', marginVertical: 15 }}>
                         <View>
-                          <Text style={styles.category}>Số Phòng</Text>
-                          <Text style={styles.value}>PS07106</Text>
-                        </View>
-
-                        <View>
-                          <Text style={styles.category}>Loại Phòng</Text>
-                          <Text style={styles.value}>VIP</Text>
+                          <Text style={styles.category}>Room</Text>
+                          <Text style={styles.value}>{item.room}</Text>
                         </View>
                       </View>
                       <Text style={styles.txtTotal}>

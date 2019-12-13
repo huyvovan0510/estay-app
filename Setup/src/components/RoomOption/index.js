@@ -16,7 +16,6 @@ const { scale } = Util;
 const Ctitle = ({ Room = [], roomCategory = '', getInforRooms }) => {
   const [id, setId] = useState('');
   const getID = id => {
-    console.log(id);
     setId(id);
   };
 

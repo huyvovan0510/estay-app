@@ -20,6 +20,7 @@ const BookCalendar = ({ navigation }) => {
     imgSrc = '',
     hotelName = 'Sontana Hotel',
     location = '',
+    room = '',
   } = item;
   const [totalDay, setTotalDay] = useState(0);
   const [startDay, setStartDay] = useState({});
@@ -31,7 +32,7 @@ const BookCalendar = ({ navigation }) => {
   }, []);
 
   const BookingDay = useRef(0);
-  console.warn(BookingDay.current.getDate);
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar backgroundColor="transparent" barStyle="light-content" />
@@ -39,7 +40,7 @@ const BookCalendar = ({ navigation }) => {
       <Calendar onGetTotalDay={onGetTotalDay} onGetStartDay={onGetStartDay} />
       <View style={styles.NextBox}>
         <View>
-          <Text>{'Total: ' + Price * totalDay + '  VND'}</Text>
+          <Text>Total: {totalDay < 0 ? Price : Price * totalDay} VND'}</Text>
         </View>
         <TouchableOpacity
           style={styles.btnNext}
@@ -54,6 +55,7 @@ const BookCalendar = ({ navigation }) => {
                   location: location,
                   day: totalDay,
                   startDay: startDay,
+                  room: room,
                 })
               : alert('Bạn chưa chọn ngày');
           }}>

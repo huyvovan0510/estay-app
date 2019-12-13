@@ -24,7 +24,7 @@ import { data } from '../../data';
 import Util from '@src/comon/Util';
 import LoadingSC from '@src/comon/LoadingSc';
 import axios from 'axios';
-
+import AsyncStorage from '@react-native-community/async-storage';
 const { scale } = Util;
 
 const category = [
@@ -49,19 +49,25 @@ const category = [
 ];
 
 const Home = ({ navigation }) => {
-  console.log('Homerender');
   const [hotelsData, setHotelsData] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [tmp, setTmp] = useState({});
 
+  // const value = AsyncStorage.getItem('@storage_Key');
+
+  const value = AsyncStorage.getItem('inforUser', (_err, result) => {
+    setTmp(result);
+    return result;
+  });
   const getdata = () => {
     axios
-      .get('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
+      .get('https://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
       .then(function(response) {
         response ? setHotelsData(response.data) : setHotelsData([]);
         setLoading(false);
       })
       .catch(function(error) {
-        console.log(error);
+        alert(JSON.stringify(error));
       });
   };
 
@@ -164,16 +170,15 @@ const Home = ({ navigation }) => {
         </TouchableOpacity>
         <StatusBar backgroundColor="transparent" barStyle="light-content" />
         <ScrollView
+          style={{ flex: 1, backgroundColor: '#ffff' }}
           showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          style={{ backgroundColor: '#ffff' }}>
+          showsVerticalScrollIndicator={false}>
           <View style={styles.boxCarưosel}>
-            {console.log('=====')}
             <Carousel
               autoplay
               layout={'default'}
               loop
-              data={data}
+              data={hotelsData}
               renderItem={_renderSile}
               sliderWidth={widthScreen}
               itemWidth={widthScreen}
@@ -191,7 +196,9 @@ const Home = ({ navigation }) => {
                 keyExtractor={item => item.id}
                 showsHorizontalScrollIndicator={false}
                 horizontal
-                data={hotelsData}
+                data={hotelsData.filter(item => {
+                  return item.category === 'Hotel';
+                })}
                 renderItem={_renderItemProduct}
               />
             </View>
@@ -202,7 +209,7 @@ const Home = ({ navigation }) => {
                 showsHorizontalScrollIndicator={false}
                 numColumns={2}
                 data={hotelsData.filter(item => {
-                  return item.category === 'Hotel';
+                  return item.category === 'Motel';
                 })}
                 renderItem={_renderItemMotel}
               />
@@ -211,7 +218,9 @@ const Home = ({ navigation }) => {
             <FlatList
               keyExtractor={item => item.id}
               showsHorizontalScrollIndicator={false}
-              data={hotelsData}
+              data={hotelsData.filter(item => {
+                return item.category === 'HomeStay';
+              })}
               renderItem={_renderItemProduct_2}
             />
           </View>

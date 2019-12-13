@@ -20,7 +20,7 @@ const Map = ({ data = [], unLike, navigation }) => {
   return (
     <View style={styles.contaimer}>
       <StatusBar backgroundColor="transparent" barStyle="light-content" />
-      <Cheader name={'Yêu Thích'} navigation={navigation} />
+      <Cheader name={'Liked'} navigation={navigation} />
       {data.length > 0 ? (
         <ScrollView>
           {data.map((item, index) => {
@@ -94,7 +94,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

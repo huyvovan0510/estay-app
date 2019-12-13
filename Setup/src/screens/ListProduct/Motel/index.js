@@ -16,14 +16,17 @@ import axios from 'axios';
 
 const Motel = ({ navigation }) => {
   const [hotelsData, setHotelsData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const getdata = () => {
     axios
-      .get('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
+      .get('https://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
       .then(function(response) {
         response ? setHotelsData(response.data) : setHotelsData([]);
-        setLoading(false);
+
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000);
       })
       .catch(function(error) {
         console.log(error);

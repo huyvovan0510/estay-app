@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
   Text,
-  ImageBackground,
   FlatList,
   StatusBar,
   TouchableOpacity,
@@ -11,42 +10,25 @@ import {
 } from 'react-native';
 import { heightScreen } from '@src/comon/Dimensions';
 import Icons from '@src/comon/Icon';
+import AsyncStorage from '@react-native-community/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
-const Settig = [
-  { id: '1', name: 'Thông tin chi tiết', icon: 'user', type: 'AntDesign' },
-  {
-    id: '2',
-    name: 'Xác minh tài khoản',
-    icon: 'check-circle',
-    type: 'Feather',
-  },
-  {
-    id: '3',
-    name: 'Liên hệ với chúng tôi',
-    icon: 'contacts',
-    type: 'AntDesign',
-  },
-  { id: '1', name: 'Cài đặt', icon: 'setting', type: 'AntDesign' },
-];
 
 const Setting = ({ navigation }) => {
-  const login = false;
-  const _renderItems = ({ item, index }) => {
-    return (
-      <View style={styles.boxItems}>
-        <View style={styles.lefBox}>
-          <Icons name={item.icon} size={30} color="#8a8a8a" type={item.type} />
-          <Text style={styles.txtOptioms}>{item.name}</Text>
-        </View>
-        <Icons name="right" size={25} type="AntDesign" color="#8a8a8a" />
-      </View>
-    );
+  const [isLogin, setIsLogin] = useState(null);
+  AsyncStorage.getItem('inforUser', (_err, result) => {
+    setIsLogin(JSON.parse(result));
+  });
+  const onLogout = async () => {
+    try {
+      await AsyncStorage.setItem('inforUser', JSON.stringify(null));
+    } catch (e) {
+      // saving error
+    }
   };
-
   return (
     <View style={{ flex: 1 }}>
       <StatusBar backgroundColor="transparent" barStyle="light-content" />
-      {!login ? (
+      {!isLogin ? (
         <View style={styles.Login}>
           <View
             style={{
@@ -66,55 +48,78 @@ const Setting = ({ navigation }) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Text style={styles.txtJonh}>Tham gia ngay với chúng tôi</Text>
+              <Text style={styles.txtJonh}>Join now with us !</Text>
               <TouchableOpacity
                 style={styles.btnLogin}
                 onPress={() => {
                   navigation.navigate('Login');
                 }}>
-                <Text style={styles.txtLogin}>Đăng Nhập </Text>
+                <Text style={styles.txtLogin}> Log in </Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       ) : (
-        <View>
-          <View style={styles.header}>
-            <View style={styles.useRow}>
-              <View style={styles.avatar} />
-              <View style={styles.content}>
-                <Text style={styles.userName}>Tên Tài Khoản</Text>
-                <Text style={styles.Wallet}>Ví {0} VND</Text>
-              </View>
-            </View>
-          </View>
-          <View>
-            <FlatList
-              scrollEnabled={false}
-              data={Settig}
-              renderItem={_renderItems}
-            />
-          </View>
-        </View>
+        <LinearGradient
+          colors={['#ff1f75', '#ef9995']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={styles.avatar} />
+          <Text style={styles.userName}>{isLogin.username}</Text>
+          <Text style={styles.Wallet}>{isLogin.email}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              onLogout();
+            }}>
+            <LinearGradient
+              colors={['#F9c449', '#ef9995']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={{
+                width: 250,
+                height: 60,
+                borderRadius: 50,
+                marginTop: 100,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{ color: '#fff', fontSize: 20 }}>Log out</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </LinearGradient>
       )}
     </View>
   );
 };
-
+const InfoItem = ({ icon, data, type }) => {
+  return (
+    <View style={styles.boxItems}>
+      <View style={styles.lefBox}>
+        <Icons name={icon} size={30} color="#ff1f75" type={type} />
+        <Text style={styles.txtOptioms}>{data}</Text>
+      </View>
+    </View>
+  );
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   header: {
+    backgroundColor: '#ff1f75',
     width: '100%',
     height: heightScreen / 5,
   },
   avatar: {
-    width: 90,
-    height: 90,
+    overflow: 'hidden',
+    width: 130,
+    height: 130,
     backgroundColor: '#c8c8c8',
-    borderRadius: 45,
+    borderRadius: 70,
     margin: 20,
+    borderColor: '#ffff',
+    borderWidth: 4,
   },
   content: {
     flex: 1,
@@ -122,14 +127,15 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontWeight: '500',
-    fontSize: 20,
-    color: '#000',
+    fontSize: 30,
+    color: '#fff',
     lineHeight: 30,
     paddingVertical: 5,
   },
   Wallet: {
-    color: '#000',
-    fontSize: 15,
+    fontWeight: '500',
+    color: '#d9d9d9',
+    fontSize: 16,
   },
   boxItems: {
     marginVertical: 5,
@@ -145,7 +151,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   txtOptioms: {
-    color: '#707070',
+    color: '#000',
     fontWeight: '300',
     fontSize: 17,
     lineHeight: 20,

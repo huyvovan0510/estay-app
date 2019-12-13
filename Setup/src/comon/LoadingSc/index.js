@@ -11,7 +11,7 @@ const LoadingSc = () => {
   return (
     <View style={{ flex: 1 }}>
       <LottieView
-        source={require('../../assets/annimated/Loading.json')}
+        source={require('../../assets/annimated/Planhodel.json')}
         autoPlay
         loop
       />

@@ -146,10 +146,12 @@ const styles = StyleSheet.create({
     color: '#ff1f75',
   },
   headerDetails: {
+    zIndex: 2,
+
     width: '100%',
     padding: scale(15),
     position: 'absolute',
-    top: Platform.OS === 'ios' ? '8%' : '3%',
+    top: Platform.OS === 'android' ? '3%' : '3%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

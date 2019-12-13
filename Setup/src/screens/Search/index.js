@@ -14,21 +14,22 @@ import {
 import Icon from '@src/comon/Icon';
 import LottieView from 'lottie-react-native';
 import ItemProdcut_2 from '@src/components/ItemProduct_2';
+import axios from 'axios';
+
 const Search = ({ navigation }) => {
   const [hotelsData, setHotelsData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
 
   const getdata = () => {
-    setLoading(true);
-    fetch('http://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotles')
-      .then(response => response.json())
-      .then(responseJson => {
-        setHotelsData(responseJson);
+    axios
+      .get('https://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
+      .then(function(response) {
+        response ? setHotelsData(response.data) : setHotelsData([]);
         setLoading(false);
       })
-      .catch(error => {
-        console.error(error);
+      .catch(function(error) {
+        console.log(error);
       });
   };
 
@@ -46,10 +47,15 @@ const Search = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.input}>
-        <Icon name="search" type="Feather" color="#d8d8d8" />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Icon name="search" type="Feather" color="#d8d8d8" />
+        </TouchableOpacity>
         <TextInput
           style={{ paddingHorizontal: 10, width: '90%' }}
-          placeholder={'Nhập nơi bạn muốn đến...'}
+          placeholder={'Where you want to go...'}
           onChangeText={onSearch}
         />
         <Icon name="closecircle" type="AntDesign" color="#d8d8d8" />
