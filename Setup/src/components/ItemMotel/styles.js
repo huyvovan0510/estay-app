@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   hotelName: {
     marginBottom: scale(5),
     color: '#000',
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: '500',
   },
   decHotel: {

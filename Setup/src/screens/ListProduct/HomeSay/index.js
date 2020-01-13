@@ -18,17 +18,19 @@ import LoadingSC from '@src/comon/LoadingSc';
 const HomeStay = ({ navigation }) => {
   const [hotelsData, setHotelsData] = useState([]);
   const [isLoading, setLoading] = useState(true);
-
+  let HomeStays = hotelsData.filter(item => {
+    return item.category === 'HomeStay';
+  });
   const getdata = () => {
     axios
-      .get('https://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
-      .then(function(response) {
+      .get('https://estay.herokuapp.com/hotels/getData')
+      .then(response => {
         response ? setHotelsData(response.data) : setHotelsData([]);
         setTimeout(() => {
           setLoading(false);
         }, 3000);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(error);
       });
   };
@@ -47,15 +49,8 @@ const HomeStay = ({ navigation }) => {
       {isLoading ? (
         <LoadingSC />
       ) : (
-        <ScrollView style={styles.content}>
-          <FlatList
-            style={{ alignSelf: 'center' }}
-            showsVerticalScrollIndicator={false}
-            data={hotelsData.filter(item => {
-              return item.category === 'HomeStay';
-            })}
-            numColumns={2}
-            renderItem={({ item, index }) => {
+          <ScrollView horizontal style={styles.content}>
+            {HomeStays.map((item, index) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
@@ -64,10 +59,9 @@ const HomeStay = ({ navigation }) => {
                   <ItemMotel data={item} index={index} />
                 </TouchableOpacity>
               );
-            }}
-          />
-        </ScrollView>
-      )}
+            })}
+          </ScrollView>
+        )}
     </View>
   );
 };
@@ -77,8 +71,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    paddingVertical: scale(20),
+    // backgroundColor: 'red',
+    // paddingVertical: scale(20),
     flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   header: {
     marginTop: 20,

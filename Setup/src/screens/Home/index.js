@@ -3,13 +3,11 @@ import {
   View,
   Text,
   Image,
-  FlatList,
   ScrollView,
   TouchableOpacity,
   StatusBar,
-  TextInput,
 } from 'react-native';
-import Icons from '@src/comon/Icon';
+
 import Carousel from 'react-native-snap-carousel';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -17,10 +15,8 @@ import { widthScreen, heightScreen } from '../../comon/Dimensions';
 import ItemProduct from '../../components/ItemProduct';
 import ItemMotel from '../../components/ItemMotel';
 import ItemProduct_2 from '../../components/ItemProduct_2';
-import Header from '../../comon/Header';
 import CTitle from '@src/comon/CTitle';
 import styles from './style';
-import { data } from '../../data';
 import Util from '@src/comon/Util';
 import LoadingSC from '@src/comon/LoadingSc';
 import axios from 'axios';
@@ -47,13 +43,19 @@ const category = [
     iconName: 'hotel',
   },
 ];
-
 const Home = ({ navigation }) => {
   const [hotelsData, setHotelsData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [tmp, setTmp] = useState({});
-
-  // const value = AsyncStorage.getItem('@storage_Key');
+  let Hotels = hotelsData.filter(item => {
+    return item.category === 'Hotel';
+  });
+  let Motel = hotelsData.filter(item => {
+    return item.category === 'Motel';
+  });
+  let HomeStay = hotelsData.filter(item => {
+    return item.category === 'HomeStay';
+  });
 
   const value = AsyncStorage.getItem('inforUser', (_err, result) => {
     setTmp(result);
@@ -61,12 +63,12 @@ const Home = ({ navigation }) => {
   });
   const getdata = () => {
     axios
-      .get('https://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
-      .then(function(response) {
+      .get('https://estay.herokuapp.com/hotels/getData')
+      .then(response => {
         response ? setHotelsData(response.data) : setHotelsData([]);
         setLoading(false);
       })
-      .catch(function(error) {
+      .catch(error => {
         alert(JSON.stringify(error));
       });
   };
@@ -81,7 +83,6 @@ const Home = ({ navigation }) => {
         key={item.id}
         activeOpacity={0.8}
         onPress={() => {
-          //navigate to Details product scerren  and pass data
           navigation.push('DetailsProduct', { data: item });
         }}>
         <Image
@@ -111,48 +112,7 @@ const Home = ({ navigation }) => {
       </TouchableOpacity>
     );
   };
-  //render  Items  TopHotel
-  const _renderItemProduct = ({ item, index }) => {
-    return (
-      <TouchableOpacity
-        key={item.id}
-        activeOpacity={0.8}
-        style={styles.shadow}
-        onPress={() => {
-          navigation.push('DetailsProduct', { data: item });
-        }}>
-        <ItemProduct data={item} />
-      </TouchableOpacity>
-    );
-  };
-
-  //render
-  const _renderItemMotel = ({ item, index }) => {
-    return (
-      <TouchableOpacity
-        key={item.id}
-        activeOpacity={0.8}
-        style={styles.shadow}
-        onPress={() => {
-          navigation.push('DetailsProduct', { data: item });
-        }}>
-        <ItemMotel data={item} index={index} />
-      </TouchableOpacity>
-    );
-  };
-  const _renderItemProduct_2 = ({ item, index }) => {
-    return (
-      <TouchableOpacity
-        key={item.id}
-        activeOpacity={0.8}
-        style={styles.shadow}
-        onPress={() => {
-          navigation.push('DetailsProduct', { data: item });
-        }}>
-        <ItemProduct_2 data={item} />
-      </TouchableOpacity>
-    );
-  };
+  console.log(hotelsData);
 
   if (isLoading === true) {
     return <LoadingSC />;
@@ -191,38 +151,51 @@ const Home = ({ navigation }) => {
               {category.map(_renderItemCategory)}
             </View>
             <CTitle title="Hot Hotel" color="red" size={16} />
-            <View style={{}}>
-              <FlatList
-                keyExtractor={item => item.id}
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                data={hotelsData.filter(item => {
-                  return item.category === 'Hotel';
-                })}
-                renderItem={_renderItemProduct}
-              />
-            </View>
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal>
+              {Hotels.map(item => {
+                return (
+                  <TouchableOpacity
+                    key={item.id}
+                    activeOpacity={0.8}
+                    style={styles.shadow}
+                    onPress={() => {
+                      navigation.push('DetailsProduct', { data: item });
+                    }}>
+                    <ItemProduct data={item} />
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
             <CTitle title="Motel" color="red" size={16} />
-            <View style={{ alignItems: 'center', flex: 1 }}>
-              <FlatList
-                keyExtractor={item => item.id}
-                showsHorizontalScrollIndicator={false}
-                numColumns={2}
-                data={hotelsData.filter(item => {
-                  return item.category === 'Motel';
-                })}
-                renderItem={_renderItemMotel}
-              />
+            <View style={styles.motelContent}>
+              {Motel.map((item, index) => {
+                return (
+                  <TouchableOpacity
+                    key={item.id}
+                    activeOpacity={0.8}
+                    style={styles.shadow}
+                    onPress={() => {
+                      navigation.push('DetailsProduct', { data: item });
+                    }}>
+                    <ItemMotel data={item} index={index} />
+                  </TouchableOpacity>
+                );
+              })}
             </View>
             <CTitle title="Home Stay" color="red" size={16} />
-            <FlatList
-              keyExtractor={item => item.id}
-              showsHorizontalScrollIndicator={false}
-              data={hotelsData.filter(item => {
-                return item.category === 'HomeStay';
-              })}
-              renderItem={_renderItemProduct_2}
-            />
+            {HomeStay.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  key={item.id}
+                  activeOpacity={0.8}
+                  style={styles.shadow}
+                  onPress={() => {
+                    navigation.push('DetailsProduct', { data: item });
+                  }}>
+                  <ItemProduct_2 data={item} />
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </ScrollView>
       </View>

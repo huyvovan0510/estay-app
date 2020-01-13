@@ -19,7 +19,7 @@ const Hotel = ({ navigation }) => {
 
   const getdata = () => {
     axios
-      .get('https://5d940e73a961920014e92f5d.mockapi.io/api/v1/Hotels')
+      .get('https://estay.herokuapp.com/hotels/getData')
       .then(function(response) {
         response ? setHotelsData(response.data) : setHotelsData([]);
         setTimeout(() => {

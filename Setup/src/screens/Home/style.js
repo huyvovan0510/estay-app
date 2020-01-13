@@ -120,5 +120,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  motelContent: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    flex: 1,
+    flexDirection: 'row',
+  },
 });
 export default styles;
