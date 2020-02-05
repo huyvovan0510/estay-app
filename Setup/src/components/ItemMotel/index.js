@@ -30,7 +30,9 @@ const ItemProduct_1 = ({ data, index, navigation }) => {
         </View>
         <View style={styles.comtentBox}>
           <View style={styles.textContent}>
-            <Text style={styles.hotelName}>{hotelName}</Text>
+            <Text numberOfLines={1} style={styles.hotelName}>
+              {hotelName}
+            </Text>
             <View style={styles.rowLocation}>
               <Icons name="home" size={15} color="#000" type="AntDesign" />
               <Text style={styles.txtCategory}>{data.category}</Text>

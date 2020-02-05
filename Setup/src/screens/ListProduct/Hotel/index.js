@@ -20,13 +20,13 @@ const Hotel = ({ navigation }) => {
   const getdata = () => {
     axios
       .get('https://estay.herokuapp.com/hotels/getData')
-      .then(function(response) {
+      .then(function (response) {
         response ? setHotelsData(response.data) : setHotelsData([]);
         setTimeout(() => {
           setLoading(false);
         }, 3000);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   };
@@ -37,11 +37,7 @@ const Hotel = ({ navigation }) => {
 
   return (
     <View style={styles.contaimer}>
-      <Cheader
-        name={'Hotel'}
-        navigation={navigation}
-        icon={'chevron-thin-left'}
-      />
+      <Cheader name={'Hotel'} navigation={navigation} icon={'angle-left'} />
       {isLoading ? (
         <View style={{ flex: 1 }}>
           <LottieView
@@ -51,26 +47,26 @@ const Hotel = ({ navigation }) => {
           />
         </View>
       ) : (
-        <View style={styles.content}>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={hotelsData.filter(item => {
-              return item.category === 'Hotel';
-            })}
-            numColumns={2}
-            renderItem={({ item, index }) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.push('DetailsProduct', { data: item });
-                  }}>
-                  <ItemHotel data={item} index={index} />
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </View>
-      )}
+          <View style={styles.content}>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={hotelsData.filter(item => {
+                return item.category === 'Hotel';
+              })}
+              numColumns={2}
+              renderItem={({ item, index }) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.push('DetailsProduct', { data: item });
+                    }}>
+                    <ItemHotel data={item} index={index} />
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </View>
+        )}
     </View>
   );
 };

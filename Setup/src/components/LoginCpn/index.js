@@ -23,15 +23,14 @@ const LoginCpn = ({ navigation }) => {
         email: email,
         password: passWord,
       })
-      .then(function(response) {
-        console.log(response.data);
+      .then(response => {
         response.status === 200
           ? navigation.navigate('Home')
           : setShowError(true);
         // bật dailog
         saveInForUser(response.data);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(error);
       });
   };
@@ -42,7 +41,6 @@ const LoginCpn = ({ navigation }) => {
       // saving error
     }
   };
-
   const closeDailog = () => {
     setShowError(false);
   };

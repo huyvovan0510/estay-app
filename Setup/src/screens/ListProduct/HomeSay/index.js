@@ -41,11 +41,7 @@ const HomeStay = ({ navigation }) => {
 
   return (
     <View style={styles.contaimer}>
-      <Cheader
-        name={'HomeStay'}
-        navigation={navigation}
-        icon={'chevron-left'}
-      />
+      <Cheader name={'HomeStay'} navigation={navigation} icon={'angle-left'} />
       {isLoading ? (
         <LoadingSC />
       ) : (

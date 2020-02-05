@@ -21,14 +21,14 @@ const Motel = ({ navigation }) => {
   const getdata = () => {
     axios
       .get('https://estay.herokuapp.com/hotels/getData')
-      .then(function(response) {
+      .then(function (response) {
         response ? setHotelsData(response.data) : setHotelsData([]);
 
         setTimeout(() => {
           setLoading(false);
         }, 3000);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   };
@@ -39,11 +39,7 @@ const Motel = ({ navigation }) => {
 
   return (
     <View style={styles.contaimer}>
-      <Cheader
-        name={'Motel'}
-        navigation={navigation}
-        icon={'chevron-thin-left'}
-      />
+      <Cheader name={'Motel'} navigation={navigation} icon={'angle-left'} />
       {isLoading ? (
         <View style={{ flex: 1 }}>
           <LottieView
@@ -53,25 +49,25 @@ const Motel = ({ navigation }) => {
           />
         </View>
       ) : (
-        <ScrollView style={styles.content}>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={hotelsData.filter(item => {
-              return item.category === 'Motel';
-            })}
-            renderItem={({ item, index }) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.push('DetailsProduct', { data: item });
-                  }}>
-                  <ItemProdcut_2 data={item} index={index} />
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </ScrollView>
-      )}
+          <ScrollView style={styles.content}>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={hotelsData.filter(item => {
+                return item.category === 'Motel';
+              })}
+              renderItem={({ item, index }) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.push('DetailsProduct', { data: item });
+                    }}>
+                    <ItemProdcut_2 data={item} index={index} />
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </ScrollView>
+        )}
     </View>
   );
 };
